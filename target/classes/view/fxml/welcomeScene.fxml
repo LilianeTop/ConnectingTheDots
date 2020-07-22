@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.WelcomeSceneController">
+    <children>
+        <Label layoutX="250.0" layoutY="40.0" prefHeight="54.0" prefWidth="900.0" text="Connecting The Dots">
+            <font>
+                <Font size="36.0" />
+            </font>
+        </Label>
+        <Label layoutX="250.0"  layoutY="90.0" text="Welkom en veel  leesplezier!">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+        <Label fx:id="subTitel" layoutX="30.0" layoutY="500.0" text="Vergeet niet een review achter te laten.">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Label>
+        <MenuButton fx:id="taskMenuButton" layoutX="400.0" layoutY="200.0" mnemonicParsing="false" text="Kies taak">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </MenuButton>
+        <Label layoutX="250.0" layoutY="200.0" text="Wat wilt u doen?">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Button fx:id="logoutButton" layoutX="400.0" layoutY="250.0" mnemonicParsing="false" onAction="#doQuit" text="Klaar">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Button>
+    </children>
+</AnchorPane>
