@@ -4,13 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class  DBAccess {
-    /* public static DBAccess getDBAccess() {
-        if (database == null) {
-            database = new DBAccess("ConnectingTheDots", "userConnectingTheDots", "pwConnectingTheDots");
-        }
-        return database;
-    }*/
+public class DBAccess {
+
 
     private Connection connection;
     private static final String DATABASE_NAME = "ConnectingTheDots";
@@ -24,11 +19,6 @@ public class  DBAccess {
             "&useJDBCCompliantTimezoneShift=true" +
             "&useLegacyDatetimeCode=false" +
             "&serverTimezone=UTC";
-
-   /* public DBAccess(String databaseName, String mainUser, String mainUserPassword) {
-        super();
-
-    }*/
 
     public DBAccess() {
         super();
@@ -72,8 +62,7 @@ public class  DBAccess {
             if (connection.isClosed()) {
                 this.openConnection();
             }
-        }
-        catch (SQLException sqlFout) {
+        } catch (SQLException sqlFout) {
             System.out.println("connection error");
         }
         return connection;

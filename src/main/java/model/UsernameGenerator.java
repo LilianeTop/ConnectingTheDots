@@ -24,20 +24,22 @@ public class UsernameGenerator {
     }
 
     public String createUsername() {
+
         if (lastName.length() < 3) {
-            this.userName = this.lastName + "x" + this.firstName.substring(0, 3) + 001;
+            this.userName = String.format("%s%s%s%03d",this.lastName,"x",this.firstName.substring(0, 3),001);
         }
-        if (firstName.length() < 3) {
-            this.userName = this.lastName.substring(0, 3) + this.firstName + "x" + 001;
+        else if (firstName.length() < 3) {
+            this.userName = String.format("%s%s%s%03d", this.lastName.substring(0, 3), this.firstName, "x", 001);
         }
-        if (lastName.length() < 3 && firstName.length() < 3) {
-            this.userName = this.lastName + "x" + this.firstName + "x" + 001;
+        else if (lastName.length() < 3 && firstName.length() < 3) {
+            this.userName = String.format("%s%s%s%s%03d",this.lastName, "x", this.firstName, "x", 001);
         } else {
-            this.userName = this.lastName.substring(0, 3) + this.firstName.substring(0, 3) + 001;
+            this.userName = String.format("%s%s%03d", this.lastName.substring(0, 3), this.firstName.substring(0, 3), 001);
         }
-        while (!userDAO.getOneByUsername(userName).equals(null)) {//if userName already exists
-            this.userName = this.userName.substring(0, 6) + Integer.parseInt(this.userName.substring(6)) + 1;//does this work?
-        }
+        //fixme: maybe check if username already exists than the username needs to be already in db
+       /* if (!userDAO.getOneByUsername(userName).equals(null)) {//if userName already exists
+            this.userName =  String.format(this.userName.substring(0, 6) + Integer.parseInt(this.userName.substring(6)) + 1);//does this work? not yet
+        }*/
         return userName;
     }
     public String getUserName() {
