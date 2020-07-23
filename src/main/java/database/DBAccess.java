@@ -5,11 +5,17 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class  DBAccess {
+    /* public static DBAccess getDBAccess() {
+        if (database == null) {
+            database = new DBAccess("ConnectingTheDots", "userConnectingTheDots", "pwConnectingTheDots");
+        }
+        return database;
+    }*/
 
     private Connection connection;
-    private String databaseName;
-    private String mainUser;
-    private String mainUserPassword;
+    private static final String DATABASE_NAME = "ConnectingTheDots";
+    private static final String MAIN_USER = "userConnectingTheDots";
+    private static final String MAIN_USER_PASSWORD = "pwConnectingTheDots";
     private static final String SQL_EXCEPTION = "SQL Exception: ";
     private static final String MYSQL_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String PREFIX_CONNECTION_URL = "jdbc:mysql://localhost:3306/";
@@ -19,24 +25,26 @@ public class  DBAccess {
             "&useLegacyDatetimeCode=false" +
             "&serverTimezone=UTC";
 
-    public DBAccess(String databaseName, String mainUser, String mainUserPassword) {
+   /* public DBAccess(String databaseName, String mainUser, String mainUserPassword) {
         super();
-        this.databaseName = databaseName;
-        this.mainUser = mainUser;
-        this.mainUserPassword = mainUserPassword;
+
+    }*/
+
+    public DBAccess() {
+        super();
     }
 
     /**
      * Open database connection
      */
     public void openConnection() {
-        String connectionURL = PREFIX_CONNECTION_URL + databaseName + CONNECTION_SETTINGS;
+        String connectionURL = PREFIX_CONNECTION_URL + DATABASE_NAME + CONNECTION_SETTINGS;
         try {
             System.out.print("Load the driver... ");
             Class.forName(MYSQL_DRIVER); // laad de JDBC-driver.
             System.out.println("Driver loaded");
 
-            connection = DriverManager.getConnection(connectionURL, mainUser, mainUserPassword);
+            connection = DriverManager.getConnection(connectionURL, MAIN_USER, MAIN_USER_PASSWORD);
             System.out.println("OK, Connection open");
         } catch (ClassNotFoundException driverFout) {
             System.out.println("Driver not found");

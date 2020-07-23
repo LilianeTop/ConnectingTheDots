@@ -22,7 +22,7 @@ public class Main extends Application {
     //dit is ook een singleton design er kan er maar 1 dbAccess zijn
     public static DBAccess getDBAccess() {
         if (database == null) {
-            database = new DBAccess("ConnectingTheDots", "userConnectingTheDots", "pwConnectingTheDots");
+            database = new DBAccess();
         }
         return database;
     }
