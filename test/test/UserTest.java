@@ -10,25 +10,23 @@ class UserTest {
 
     @Test
     public void createUsername() {
-        //todo:not working as null pointer exception => while statement to if
-        //fixme: how to display 001 instead if just 1
-
-        UsernameGenerator usernameGenerator = new UsernameGenerator("Tessa", "de", "Janssen");
+        //todo:not working as null pointer exception => if-else
+        UsernameGenerator usernameGenerator = new UsernameGenerator("Tessa", "Janssen");
         String expected = "JanTes001";
         String actual = usernameGenerator.createUsername();
         assertEquals(expected, actual);
 
-        usernameGenerator = new UsernameGenerator("Te", "de", "Janssen");
+        usernameGenerator = new UsernameGenerator("Te", "Janssen");
         expected = "JanTex001";
         actual = usernameGenerator.createUsername();
         assertEquals(expected, actual);
 
-        usernameGenerator = new UsernameGenerator("Tessa", "de", "Ja");
+        usernameGenerator = new UsernameGenerator("Tessa", "Ja");
         expected = "JaxTes001";
         actual = usernameGenerator.createUsername();
         assertEquals(expected, actual);
 
-        usernameGenerator = new UsernameGenerator("Lilore", null, "Topaz");
+        usernameGenerator = new UsernameGenerator("Lilore", "Topaz");
         expected = "TopLil001";
         actual = usernameGenerator.createUsername();
         assertEquals(expected, actual);

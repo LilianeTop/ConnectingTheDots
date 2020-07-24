@@ -77,6 +77,7 @@ public class UserDAO<E> extends AbstractDAO implements GenericDAO<E> {
         }
         return user;
     }
+
     public User getUserByEmailaddress(String mpEmailaddress){
         String sql = "SELECT * FROM User WHERE emailaddress = ?";
         User user = null;
