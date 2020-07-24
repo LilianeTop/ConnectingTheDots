@@ -10,11 +10,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserDAOTest {
 
     @Test
-    void storeOne() {
+    void storeOneTest() {
         UserDAO userDAO = new UserDAO(Main.getDBAccess());
         User userToStore = new User("Marit", null, "Seit", "marit@gmail.com", "reader");
-        Assert.assertTrue(userToStore.getLastName().equals("Seit"));
-//fixme: check what the output is hence different test
+        userDAO.storeOne(userToStore);
+        User userToStoreTest = userDAO.getUserByEmailaddress(userToStore.getEmailaddress());
+        Assert.assertTrue(userToStore.equals(userToStoreTest));
 
         Assert.assertTrue(userToStore.getUserName().equals("SeiMar001"));
 

@@ -14,8 +14,8 @@ public class UserDAO<E> extends AbstractDAO implements GenericDAO<E> {
     @Override
     public void storeOne(E mpUser) {
         //Fixme: how to implement the genericDAO if I change Object to user I doesn't work unless I add <E> twice on line 9
-        User user = null;
-        String sql = "INSERT INTO User(firstName, prefix, lastName, emailaddress, role, userName, password) Values(?,?,?,?,?);";
+        User user = (User) mpUser;
+        String sql = "INSERT INTO User(firstName, prefix, lastName, emailaddress, role, userName, password) Values(?,?,?,?,?,?,?);";
         try {
             setupPreparedStatement(sql);
             preparedStatement.setString(1, user.getFirstName());
@@ -27,6 +27,7 @@ public class UserDAO<E> extends AbstractDAO implements GenericDAO<E> {
             preparedStatement.setString(7, user.getPassword());
             executeManipulateStatement();
         } catch (SQLException error) {
+            System.out.println(error.getMessage());
             System.out.println("This user is not registered");
         }
     }
@@ -46,7 +47,7 @@ public class UserDAO<E> extends AbstractDAO implements GenericDAO<E> {
                 String role = resultSet.getString("role");
                 String userName = resultSet.getString("userName");
                 String password = resultSet.getString("password");
-                user = new User(firstName, prefix, lastName, role, mpEmailaddress, userName, password);
+                user = new User(firstName, prefix, lastName, role, mpEmailaddress);
             } else {
                 System.out.println("This emailaddress is not known to us.");
             }
@@ -63,37 +64,42 @@ public class UserDAO<E> extends AbstractDAO implements GenericDAO<E> {
             setupPreparedStatement(sql);
             preparedStatement.setString(1, mpUsername);
             ResultSet resultSet = executeSelectStatement();
-            while (resultSet.next()) {
-                String firstName = resultSet.getString("firstName");
-                String prefix = resultSet.getString("prefix");
-                String lastName = resultSet.getString("lastName");
-                String emailaddress = resultSet.getString("emailaddress");
-                String role = resultSet.getString("role");
-                String password = resultSet.getString("password");
-                user = new User(firstName, prefix, lastName, emailaddress, role, mpUsername, password);
+            if (resultSet == null || resultSet.next() == false) {
+                return null;
+            } else {
+                while (resultSet.next()) {
+                    String firstName = resultSet.getString("firstName");
+                    String prefix = resultSet.getString("prefix");
+                    String lastName = resultSet.getString("lastName");
+                    String emailaddress = resultSet.getString("emailaddress");
+                    String role = resultSet.getString("role");
+                    String password = resultSet.getString("password");
+                    user = new User(firstName, prefix, lastName, emailaddress, role);
+                }
             }
         } catch (SQLException error) {
             System.out.println("This username does not exist");
         }
         return user;
+
     }
 
-    public User getUserByEmailaddress(String mpEmailaddress){
+    public User getUserByEmailaddress(String mpEmailaddress) {
         String sql = "SELECT * FROM User WHERE emailaddress = ?";
         User user = null;
         try {
             setupPreparedStatement(sql);
             preparedStatement.setString(1, mpEmailaddress);
             ResultSet resultSet = executeSelectStatement();
-           while (resultSet.next()) {
-               String firstName = resultSet.getString("firstName");
-               String prefix = resultSet.getString("prefix");
-               String lastName = resultSet.getString("lastName");
-               String role = resultSet.getString("role");
-               String userName = resultSet.getString("userName");
-               String password = resultSet.getString("password");
-               user = new User(firstName, prefix, lastName, mpEmailaddress, role, userName, password);
-           }
+            while (resultSet.next()) {
+                String firstName = resultSet.getString("firstName");
+                String prefix = resultSet.getString("prefix");
+                String lastName = resultSet.getString("lastName");
+                String role = resultSet.getString("role");
+                String userName = resultSet.getString("userName");
+                String password = resultSet.getString("password");
+                user = new User(firstName, prefix, lastName, mpEmailaddress, role);
+            }
         } catch (SQLException error) {
             System.out.println("This emailaddress is not connected to an account");
         }
@@ -117,7 +123,7 @@ public class UserDAO<E> extends AbstractDAO implements GenericDAO<E> {
             String userName = resultSet.getString("userName");
             String password = resultSet.getString("password");
 
-            user = new User(firstName, prefix, lastName, emailaddress, role, userName, password);
+            user = new User(firstName, prefix, lastName, emailaddress, role);
             usersList.add(user);
         } catch (SQLException e) {
             System.out.println("SQL error " + e.getMessage());
