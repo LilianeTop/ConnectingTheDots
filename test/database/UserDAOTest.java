@@ -5,6 +5,8 @@ import model.User;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserDAOTest {
@@ -51,30 +53,36 @@ class UserDAOTest {
         UserDAO userDAO = new UserDAO(Main.getDBAccess());
         User userToTest = userDAO.getOneByEmailaddress("tessa@deloo.nl");
 
-        Assert.assertTrue(userToTest.getLastName().equals("Janssen"));
+        Assert.assertTrue(userToTest.getLastName().equals("Jansen"));
         Assert.assertTrue(userToTest.getUserName().equals("JanTes001"));
 
     }
 
     @Test
     void getAllTest() {
+        //fixme: is there a better way to test this?
+        UserDAO userDAO = new UserDAO(Main.getDBAccess());
+        ArrayList<User> allUsers = userDAO.getAll();
+        Assert.assertEquals(4, allUsers.size());
     }
 
     @Test
     void updateOneTest() {
     }
 
+    /* void deleteOne() {
+            questionDAO.deleteOne(3);
+            assertFalse(testquestion3.equals(questionDAO.getOneById(3)));
+        }*/
     @Test
     void deleteOneTest() {
+        //fixme: passed the tests but it is not reflected in the db why?
         UserDAO userDAO = new UserDAO(Main.getDBAccess());
-        User userToDelete = userDAO.getOneByUsername("SeiMar11");
-        userDAO.deleteOne(userToDelete);
-        User userToDelete2 = userDAO.getOneByUsername("VriMar001");
+        User userToDelete1 = userDAO.getOneByUsername("VriMar001");
+        userDAO.deleteOne(userToDelete1);
 
-
-        User deletedUser = userDAO.getOneByUsername("SeiMar11");
-        User deletedUser2 = userDAO.getOneByEmailaddress("devries@gmail.com");
-        Assert.assertEquals(userToDelete.getLastName(), deletedUser.getLastName());
-        Assert.assertEquals(userToDelete2, deletedUser2);
+       /* User userToDelete2 = userDAO.getOneByEmailaddress("devries@gmail.com");
+        User deletedUser2 = userDAO.deleteOne(userToDelete2);
+        Assert.assertEquals(userToDelete2, deletedUser2);*/
     }
 }

@@ -40,9 +40,6 @@ public class UserDAO<E> extends AbstractDAO implements GenericDAO<E> {
             setupPreparedStatement(sql);
             preparedStatement.setString(1, mpUsername);
             ResultSet resultSet = executeSelectStatement();
-           /* if (resultSet == null || resultSet.next() == false) {
-                return null;
-            } else {*/
             while (resultSet.next()) {
                 String firstName = resultSet.getString("firstName");
                 String prefix = resultSet.getString("prefix");
@@ -52,15 +49,14 @@ public class UserDAO<E> extends AbstractDAO implements GenericDAO<E> {
                 String password = resultSet.getString("password");
                 user = new User(firstName, prefix, lastName, emailaddress, role, mpUsername, password);
             }
-            // }
         } catch (SQLException error) {
             System.out.println("This username does not exist");
         }
         return user;
-
     }
 
     public boolean checkIfUsernameExists(String mpUserName) {
+        //fixme: refactor to just check if this userName is already in the database
         String sql = "Select count(*) from User Where userName = ?;";
         boolean userNameExists = false;
         try {
@@ -102,27 +98,30 @@ public class UserDAO<E> extends AbstractDAO implements GenericDAO<E> {
 
 
     @Override
-    public ArrayList getAll() {
+    public ArrayList<E> getAll() {
+        //fixme: how to adjust this to a generic method so  that I do NOT need to cast to user?
         String sql = "SELECT * FROM User";
-        ArrayList<User> usersList = new ArrayList<>();
+        ArrayList<E> allUsersList = new ArrayList<>();
+        UserDAO userDAO = new UserDAO(dbAccess);
+        User user;
         try {
             setupPreparedStatement(sql);
             ResultSet resultSet = executeSelectStatement();
-            User user;
-            String firstName = resultSet.getString("firstName");
-            String prefix = resultSet.getString("prefix");
-            String lastName = resultSet.getString("lastName");
-            String emailaddress = resultSet.getString("emailaddress");
-            String role = resultSet.getString("role");
-            String userName = resultSet.getString("userName");
-            String password = resultSet.getString("password");
-
-            user = new User(firstName, prefix, lastName, emailaddress, role);
-            usersList.add(user);
+            while (resultSet.next()) {
+                String firstName = resultSet.getString("firstName");
+                String prefix = resultSet.getString("prefix");
+                String lastName = resultSet.getString("lastName");
+                String emailaddress = resultSet.getString("emailaddress");
+                String role = resultSet.getString("role");
+                String userName = resultSet.getString("userName");
+                String password = resultSet.getString("password");
+                user = new User(firstName, prefix, lastName, emailaddress, role, userName, password);
+                allUsersList.add((E) user);
+            }
         } catch (SQLException e) {
             System.out.println("SQL error " + e.getMessage());
         }
-        return usersList;
+        return allUsersList;
     }
 
     @Override
@@ -144,16 +143,17 @@ public class UserDAO<E> extends AbstractDAO implements GenericDAO<E> {
         }
     }
 
-    @Override
-    public void deleteOne(E mpUser) {
-        User user = (User) mpUser;
+    // @Override
+    //fixme: still do not understand how generics work
+    public void deleteOne(User mpUser) {
         String sql = "DELETE FROM User WHERE userName = ?";
         try {
             setupPreparedStatement(sql);
-            preparedStatement.setString(1, user.getUserName());
+            preparedStatement.setString(1, mpUser.getUserName());
             executeManipulateStatement();
         } catch (SQLException error) {
             System.out.println("SQL error: " + error.getMessage());
         }
     }
 }
+
