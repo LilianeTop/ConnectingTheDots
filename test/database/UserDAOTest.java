@@ -13,22 +13,26 @@ class UserDAOTest {
 
     @Test
     void storeOneTest() {
+        //fixme: check if the emailaddres is already in db if so you can't register twice with same emailaddress
         UserDAO userDAO = new UserDAO(Main.getDBAccess());
 
-        /*User userToStore = new User("Marga", "van", "Seibersma", "marge@gmail.com", "reader");
+        User userToStore = new User("Mildred", "last", "Hope", "hope@gmail.com", "reader");
         userDAO.storeOne(userToStore);
         User userToStoreTest = userDAO.getOneByEmailaddress(userToStore.getEmailaddress());
-        Assert.assertTrue(userToStore.equals(userToStoreTest));*/
-        //fixme: it creates another username if number 001 exists and gives a 002 but it doesn't give a 003 why not?
-        User userToStore2 = new User("Margreet", null, "Teil", "m.teil@gmail.com", "storyteller");
+        Assert.assertTrue(userToStore.equals(userToStoreTest));
+
+        User userToStore2 = new User("Roos", null, "Langzaam", "rosita3@gmail.com", "storyteller");
         userDAO.storeOne(userToStore2);
         User userToStoreTest2 = userDAO.getOneByEmailaddress(userToStore2.getEmailaddress());
-        Assert.assertTrue(userToStore2.equals(userToStoreTest2));
+        Assert.assertTrue(userToStore2.getLastName().equals(userToStoreTest2.getLastName()));
         Assert.assertTrue(userToStore2.getUserName().equals(userToStoreTest2.getUserName()));
+        Assert .assertTrue(userToStore2.getPassword().equals(userToStoreTest2.getPassword()));
 
-         /*User userToStore3 = new User("Marijke", "de", "Vries", "devries@gmail.com", "reader");
-        userDAO.storeOne(userToStore3);*/
-        // User userToStoreTest3 = userDAO.getOneByEmailaddress(userToStore3.getEmailaddress());
+         User userToStore3 = new User("Maartje", "de", "Hythe", "maartje@gmail.com", "reader");
+        userDAO.storeOne(userToStore3);
+        User userToStoreTest3 = userDAO.getOneByEmailaddress(userToStore3.getEmailaddress());
+        Assert.assertTrue(userToStore3.getFirstName().equals(userToStoreTest3.getFirstName()));
+        Assert.assertEquals(userToStore3, userToStoreTest3);
 
 
     }
@@ -37,15 +41,17 @@ class UserDAOTest {
     @Test
     void getOneByUsernameTest() {
         UserDAO userDAO = new UserDAO(Main.getDBAccess());
+
         User userToTest = userDAO.getOneByUsername("JanTes1");
         Assert.assertTrue(userToTest.getLastName().equals("Jansen"));
+        Assert.assertEquals(userToTest.getPassword(),"12345");
 
         User userToTest2 = userDAO.getOneByUsername("topxlili001");
         Assert.assertTrue(userToTest2.getLastName().equals("Top"));
         Assert.assertTrue(userToTest2.getFirstName().equals("Liliane"));
         Assert.assertTrue(userToTest2.getEmailaddress().equals("hallo@lilianetop.nl"));
         Assert.assertTrue(userToTest2.getRole().equals("admin"));
-        Assert.assertTrue(userToTest2.getPassword().equals("1234"));//it gives an Assertion error which shouldn't
+        Assert.assertTrue(userToTest2.getPassword().equals("1234"));
 
 
     }
@@ -53,10 +59,20 @@ class UserDAOTest {
     @Test
     void getUserByEmailaddressTest() {
         UserDAO userDAO = new UserDAO(Main.getDBAccess());
-        User userToTest = userDAO.getOneByEmailaddress("tessa@deloo.nl");
 
+        User userToTest = userDAO.getOneByEmailaddress("tessa@deloo.nl");
         Assert.assertTrue(userToTest.getLastName().equals("Jansen"));
-        Assert.assertTrue(userToTest.getUserName().equals("JanTes001"));
+        Assert.assertTrue(userToTest.getUserName().equals("JanTes1"));
+
+        User userToTest2 = userDAO.getOneByEmailaddress("hallo@lilianetop.nl");
+        Assert.assertTrue(userToTest2.getLastName().equals("Top"));
+        Assert.assertTrue(userToTest2.getUserName().equals("topxlili001"));
+
+        User userToTest3 = userDAO.getOneByEmailaddress("marit@gmail.com");
+        Assert.assertTrue(userToTest3.getLastName().equals("Seit"));
+        String expected = "SeiMar001";
+        String actual = userToTest3.getUserName();
+        Assert.assertEquals(expected, actual);
 
     }
 
@@ -75,13 +91,16 @@ class UserDAOTest {
 
     @Test
     void deleteOneTest() {
-        //fixme: passed the tests but it is not reflected in the db why?
         UserDAO userDAO = new UserDAO(Main.getDBAccess());
+
         User userToDelete1 = userDAO.getOneByUsername("VriMar001");
         userDAO.deleteOne(userToDelete1);
+        User deletedUser = userDAO.getOneByUsername("VriMar001");
+        Assert.assertTrue(deletedUser == null);
 
-       /* User userToDelete2 = userDAO.getOneByEmailaddress("devries@gmail.com");
-        User deletedUser2 = userDAO.deleteOne(userToDelete2);
-        Assert.assertEquals(userToDelete2, deletedUser2);*/
+        User userToDelete2 = userDAO.getOneByEmailaddress("devries@gmail.com");
+        userDAO.deleteOne(userToDelete2);
+        User deletedUser2 = userDAO.getOneByEmailaddress("devries@gmail.com");
+        Assert.assertTrue(deletedUser2 == null);
     }
 }
