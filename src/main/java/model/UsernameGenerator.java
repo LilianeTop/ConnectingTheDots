@@ -53,15 +53,17 @@ public class UsernameGenerator {
 
     public String createUsername() {
         //fixme: first create a username than check if it exist in db if so add 1
+        int number = 1;
         if (lastName.length() < 3) {
-            this.userName = String.format("%s%s%s%03d", this.lastName, "x", this.firstName.substring(0, 3), 001);
+            this.userName = String.format("%s%s%s%03d", this.lastName, "x", this.firstName.substring(0, 3), number);
         } else if (firstName.length() < 3) {
-            this.userName = String.format("%s%s%s%03d", this.lastName.substring(0, 3), this.firstName, "x", 001);
+            this.userName = String.format("%s%s%s%03d", this.lastName.substring(0, 3), this.firstName, "x", number);
         } else if (lastName.length() < 3 && firstName.length() < 3) {
-            this.userName = String.format("%s%s%s%s%03d", this.lastName, "x", this.firstName, "x", 001);
+            this.userName = String.format("%s%s%s%s%03d", this.lastName, "x", this.firstName, "x", number);
         } else {
-            this.userName = String.format("%s%s%03d", this.lastName.substring(0, 3), this.firstName.substring(0, 3), 001);
+            this.userName = String.format("%s%s%03d", this.lastName.substring(0, 3), this.firstName.substring(0, 3), number);
         }
+        //fixme: it will give 002 but not 003 why? it should keep looping as long as the username already exists.
         while (userDAO.checkIfUsernameExists(this.userName)){
             return userName = String.format("%s%03d",this.userName.substring(0, 6), (Integer.parseInt(this.userName.substring(6)) + 1));
         }

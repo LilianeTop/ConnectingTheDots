@@ -51,7 +51,8 @@ public class User {
     }
 
     public String getPassword() {
-        return String.valueOf(password);
+        //return String.valueOf(password);
+        return password;
     }
 
     public String getRole() {
