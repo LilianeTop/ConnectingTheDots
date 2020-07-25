@@ -20,7 +20,7 @@ public class RetrievePasswordSceneController {
         StringBuilder warningText = new StringBuilder();
         boolean correctInput = true;
         String emailaddress = emailaddressForPasswordRetrieval.getText();
-        User user = userDAO.getUserByEmailaddress(emailaddress);
+        User user = userDAO.getOneByEmailaddress(emailaddress);
         if (emailaddress.isEmpty()) {
             warningText.append("Please enter an emailaddress.\n");
             correctInput = false;

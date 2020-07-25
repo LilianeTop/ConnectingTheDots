@@ -33,30 +33,6 @@ public class UserDAO<E> extends AbstractDAO implements GenericDAO<E> {
     }
 
 
-    public User getOneByEmailaddress(String mpEmailaddress) {
-        String sql = "SELECT * FROM User Where emailaddress = ?";
-        User user = null;
-        try {
-            setupPreparedStatement(sql);
-            preparedStatement.setString(1, mpEmailaddress);
-            ResultSet resultSet = executeSelectStatement();
-            if (resultSet.next()) {
-                String firstName = resultSet.getString("firstName");
-                String prefix = resultSet.getString("prefix");
-                String lastName = resultSet.getString("lastName");
-                String role = resultSet.getString("role");
-                String userName = resultSet.getString("userName");
-                String password = resultSet.getString("password");
-                user = new User(firstName, prefix, lastName, role, mpEmailaddress);
-            } else {
-                System.out.println("This emailaddress is not known to us.");
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return user;
-    }
-
     public User getOneByUsername(String mpUsername) {
         String sql = "SELECT * FROM User WHERE userName = ?";
         User user = null;
@@ -64,19 +40,19 @@ public class UserDAO<E> extends AbstractDAO implements GenericDAO<E> {
             setupPreparedStatement(sql);
             preparedStatement.setString(1, mpUsername);
             ResultSet resultSet = executeSelectStatement();
-            if (resultSet == null || resultSet.next() == false) {
+           /* if (resultSet == null || resultSet.next() == false) {
                 return null;
-            } else {
-                while (resultSet.next()) {
-                    String firstName = resultSet.getString("firstName");
-                    String prefix = resultSet.getString("prefix");
-                    String lastName = resultSet.getString("lastName");
-                    String emailaddress = resultSet.getString("emailaddress");
-                    String role = resultSet.getString("role");
-                    String password = resultSet.getString("password");
-                    user = new User(firstName, prefix, lastName, emailaddress, role);
-                }
+            } else {*/
+            while (resultSet.next()) {
+                String firstName = resultSet.getString("firstName");
+                String prefix = resultSet.getString("prefix");
+                String lastName = resultSet.getString("lastName");
+                String emailaddress = resultSet.getString("emailaddress");
+                String role = resultSet.getString("role");
+                String password = resultSet.getString("password");
+                user = new User(firstName, prefix, lastName, emailaddress, role, mpUsername, password);
             }
+            // }
         } catch (SQLException error) {
             System.out.println("This username does not exist");
         }
@@ -84,7 +60,25 @@ public class UserDAO<E> extends AbstractDAO implements GenericDAO<E> {
 
     }
 
-    public User getUserByEmailaddress(String mpEmailaddress) {
+    public boolean checkIfUsernameExists(String mpUserName) {
+        String sql = "Select count(*) from User Where userName = ?;";
+        boolean userNameExists = false;
+        try {
+            setupPreparedStatement(sql);
+            preparedStatement.setString(1, mpUserName);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                if (resultSet.getInt(1) > 0) {
+                    userNameExists = true;
+                }
+            }
+        } catch (SQLException error) {
+            System.out.println("SQL error: " + error.getMessage());
+        }
+        return userNameExists;
+    }
+
+    public User getOneByEmailaddress(String mpEmailaddress) {
         String sql = "SELECT * FROM User WHERE emailaddress = ?";
         User user = null;
         try {
@@ -133,7 +127,7 @@ public class UserDAO<E> extends AbstractDAO implements GenericDAO<E> {
 
     @Override
     public void updateOne(E mpUser) {
-        User user = null;
+        User user = (User) mpUser;
         String sql = "UPDATE Klant SET firstName = ?, prefix = ?, lastName = ?, emailaddress = ?, role = ?, password = ?  where userName = ?;";
         try {
             setupPreparedStatement(sql);
@@ -150,10 +144,9 @@ public class UserDAO<E> extends AbstractDAO implements GenericDAO<E> {
         }
     }
 
-
     @Override
     public void deleteOne(E mpUser) {
-        User user = null;
+        User user = (User) mpUser;
         String sql = "DELETE FROM User WHERE userName = ?";
         try {
             setupPreparedStatement(sql);

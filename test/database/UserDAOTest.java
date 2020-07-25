@@ -12,18 +12,28 @@ class UserDAOTest {
     @Test
     void storeOneTest() {
         UserDAO userDAO = new UserDAO(Main.getDBAccess());
+
         User userToStore = new User("Marit", null, "Seit", "marit@gmail.com", "reader");
         userDAO.storeOne(userToStore);
-        User userToStoreTest = userDAO.getUserByEmailaddress(userToStore.getEmailaddress());
+        User userToStore2 = new User("Martha", null, "Seiler", "martha_seler@gmail.com", "reader");
+        userDAO.storeOne(userToStore2);
+        User userToStore3 = new User("Marijke", "de", "Vries", "devries@gmail.com", "reader");
+        userDAO.storeOne(userToStore3);
+
+        User userToStoreTest = userDAO.getOneByEmailaddress(userToStore.getEmailaddress());
+        User userToStoreTest2 = userDAO.getOneByEmailaddress(userToStore2.getEmailaddress());
+        User userToStoreTest3 = userDAO.getOneByEmailaddress(userToStore3.getEmailaddress());
+
         Assert.assertTrue(userToStore.equals(userToStoreTest));
+        Assert.assertTrue(userToStore.getUserName().equals(userToStoreTest.getUserName()));
 
-        Assert.assertTrue(userToStore.getUserName().equals("SeiMar001"));
-
+        Assert.assertEquals(userToStore2, userToStoreTest2);
+        Assert.assertEquals(userToStore3, userToStoreTest3);
     }
 
 
     @Test
-    void getOneByUsername() {
+    void getOneByUsernameTest() {
         UserDAO userDAO = new UserDAO(Main.getDBAccess());
 
         User userToTest2 = userDAO.getOneByUsername("topxlili001");
@@ -37,9 +47,9 @@ class UserDAOTest {
     }
 
     @Test
-    void getUserByEmailaddress() {
+    void getUserByEmailaddressTest() {
         UserDAO userDAO = new UserDAO(Main.getDBAccess());
-        User userToTest = userDAO.getUserByEmailaddress("tessa@deloo.nl");
+        User userToTest = userDAO.getOneByEmailaddress("tessa@deloo.nl");
 
         Assert.assertTrue(userToTest.getLastName().equals("Janssen"));
         Assert.assertTrue(userToTest.getUserName().equals("JanTes001"));
@@ -47,14 +57,24 @@ class UserDAOTest {
     }
 
     @Test
-    void getAll() {
+    void getAllTest() {
     }
 
     @Test
-    void updateOne() {
+    void updateOneTest() {
     }
 
     @Test
-    void deleteOne() {
+    void deleteOneTest() {
+        UserDAO userDAO = new UserDAO(Main.getDBAccess());
+        User userToDelete = userDAO.getOneByUsername("SeiMar11");
+        userDAO.deleteOne(userToDelete);
+        User userToDelete2 = userDAO.getOneByUsername("VriMar001");
+
+
+        User deletedUser = userDAO.getOneByUsername("SeiMar11");
+        User deletedUser2 = userDAO.getOneByEmailaddress("devries@gmail.com");
+        Assert.assertEquals(userToDelete.getLastName(), deletedUser.getLastName());
+        Assert.assertEquals(userToDelete2, deletedUser2);
     }
 }

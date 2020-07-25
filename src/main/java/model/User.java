@@ -23,8 +23,7 @@ public class User {
     private String userName;
     private String password;
 
-    //all-args constructor
-    public User(String firstName, String prefix, String lastName, String emailaddress, String role) {
+    public User(String firstName, String prefix, String lastName, String emailaddress, String role, String userName, String password) {
         super();
         this.firstName = firstName;
         this.prefix = prefix;
@@ -35,6 +34,15 @@ public class User {
         this.passwordCreator = new PasswordGenerator(new PasswordGenerator.PasswordGeneratorBuilder());
         this.userName = userNameCreator.createUsername();
         this.password = passwordCreator.generate(10);
+    }
+
+    //constructor to register this constructor calls next cinstructor and then a username and password will be created.
+    public User(String firstName, String prefix, String lastName, String emailaddress, String role) {
+        this(firstName, prefix, lastName, emailaddress, role, null, null);
+        /*this.userNameCreator = new UsernameGenerator(firstName, lastName);//todo automatically generate a username
+        this.passwordCreator = new PasswordGenerator(new PasswordGenerator.PasswordGeneratorBuilder());
+        this.userName = userNameCreator.createUsername();
+        this.password = passwordCreator.generate(10);*/
     }
 
 

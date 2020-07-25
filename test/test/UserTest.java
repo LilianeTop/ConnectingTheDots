@@ -10,7 +10,6 @@ class UserTest {
 
     @Test
     public void createUsername() {
-        //todo:not working as null pointer exception => if-else
         UsernameGenerator usernameGenerator = new UsernameGenerator("Tessa", "Janssen");
         String expected = "JanTes001";
         String actual = usernameGenerator.createUsername();
@@ -31,6 +30,12 @@ class UserTest {
         actual = usernameGenerator.createUsername();
         assertEquals(expected, actual);
 
+//fixme: this can only be tested if the user is stored in db
+        //todo: should this be tested in userdoa?
+        usernameGenerator = new UsernameGenerator("Lilare", "Topper");
+        expected = "TopLil002";
+        actual = usernameGenerator.createUsername();
+        assertEquals(expected, actual);
 
     }
 
