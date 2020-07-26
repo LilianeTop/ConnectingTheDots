@@ -56,22 +56,7 @@ public class UserDAO<E> extends AbstractDAO implements GenericDAO<E> {
     }
 
     public boolean checkIfUsernameExists(String mpUserName) {
-        //fixme: refactor to just check if this userName is already in the database
-        String sql = "Select count(*) from User Where userName = ?";
-        boolean userNameExists = false;
-        try {
-            setupPreparedStatement(sql);
-            preparedStatement.setString(1, mpUserName);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                if (resultSet.getInt(1) > 0) {
-                    userNameExists = true;
-                }
-            }
-        } catch (SQLException error) {
-            System.out.println("SQL error: " + error.getMessage());
-        }
-        return userNameExists;
+        return (getOneByUsername(mpUserName) != null);
     }
 
     public User getOneByEmailaddress(String mpEmailaddress) {
@@ -143,7 +128,7 @@ public class UserDAO<E> extends AbstractDAO implements GenericDAO<E> {
         }
     }
 
-    // @Override
+    //@Override
     //fixme: still do not understand how generics work and it is not working total confusion
     public void deleteOne(User mpUser) {
         String sql = "DELETE FROM User WHERE userName = ?";

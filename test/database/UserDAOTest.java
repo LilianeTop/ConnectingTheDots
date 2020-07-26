@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserDAOTest {
+    //fixme: refactor code as there is much duplication
 
     @Test
     void storeOneTest() {
@@ -33,8 +34,6 @@ class UserDAOTest {
         User userToStoreTest3 = userDAO.getOneByEmailaddress(userToStore3.getEmailaddress());
         Assert.assertTrue(userToStore3.getFirstName().equals(userToStoreTest3.getFirstName()));
         Assert.assertEquals(userToStore3, userToStoreTest3);
-
-
     }
 
 
@@ -52,8 +51,6 @@ class UserDAOTest {
         Assert.assertTrue(userToTest2.getEmailaddress().equals("hallo@lilianetop.nl"));
         Assert.assertTrue(userToTest2.getRole().equals("admin"));
         Assert.assertTrue(userToTest2.getPassword().equals("1234"));
-
-
     }
 
     @Test
@@ -68,12 +65,11 @@ class UserDAOTest {
         Assert.assertTrue(userToTest2.getLastName().equals("Top"));
         Assert.assertTrue(userToTest2.getUserName().equals("topxlili001"));
 
-        User userToTest3 = userDAO.getOneByEmailaddress("marit@gmail.com");
-        Assert.assertTrue(userToTest3.getLastName().equals("Seit"));
-        String expected = "SeiMar001";
+        User userToTest3 = userDAO.getOneByEmailaddress("maartje@gmail.com");
+        Assert.assertTrue(userToTest3.getLastName().equals("Hythe"));
+        String expected = "HytMaa001";
         String actual = userToTest3.getUserName();
         Assert.assertEquals(expected, actual);
-
     }
 
     @Test
@@ -81,7 +77,7 @@ class UserDAOTest {
         //fixme: is there a better way to test this?
         UserDAO userDAO = new UserDAO(Main.getDBAccess());
         ArrayList<User> allUsers = userDAO.getAll();
-        Assert.assertEquals(4, allUsers.size());
+        Assert.assertEquals(17, allUsers.size());
     }
 
     @Test
@@ -93,14 +89,14 @@ class UserDAOTest {
     void deleteOneTest() {
         UserDAO userDAO = new UserDAO(Main.getDBAccess());
 
-        User userToDelete1 = userDAO.getOneByUsername("VriMar001");
+        User userToDelete1 = userDAO.getOneByUsername("LuiRos001");
         userDAO.deleteOne(userToDelete1);
-        User deletedUser = userDAO.getOneByUsername("VriMar001");
+        User deletedUser = userDAO.getOneByUsername("LuiRos001");
         Assert.assertTrue(deletedUser == null);
 
-        User userToDelete2 = userDAO.getOneByEmailaddress("devries@gmail.com");
+        User userToDelete2 = userDAO.getOneByEmailaddress("m.teil@gmail.com");
         userDAO.deleteOne(userToDelete2);
-        User deletedUser2 = userDAO.getOneByEmailaddress("devries@gmail.com");
+        User deletedUser2 = userDAO.getOneByUsername("TeiMar003");
         Assert.assertTrue(deletedUser2 == null);
     }
 }
