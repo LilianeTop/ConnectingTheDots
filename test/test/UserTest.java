@@ -16,28 +16,26 @@ class UserTest {
         String actual = usernameGenerator.createUsername("Tessa", "Janssen");
         assertEquals(expected, actual);
 
-
-        usernameGenerator = new UsernameGenerator();
         expected = "LuiRos001";
         actual = usernameGenerator.createUsername("Rose", "Luifje");
         assertEquals(expected, actual);
 
-        usernameGenerator = new UsernameGenerator();
+        expected = "GasYox001";
+        actual = usernameGenerator.createUsername("Yo", "Gasselt");
+        assertEquals(expected, actual);
+
         expected = "JanTex001";
         actual = usernameGenerator.createUsername("Te", "Janssen");
         assertEquals(expected, actual);
 
-        usernameGenerator = new UsernameGenerator();
         expected = "JaxTes001";
         actual = usernameGenerator.createUsername("Tessa", "Ja");
         assertEquals(expected, actual);
 
-        usernameGenerator = new UsernameGenerator();
-        expected = "TopLil001";
+        expected = "TopLil004";
         actual = usernameGenerator.createUsername("Lilore", "Topaz");
         assertEquals(expected, actual);
 
-        usernameGenerator = new UsernameGenerator();
         expected = "TeiMar003";
         actual = usernameGenerator.createUsername("Martje", "Teissen");
         assertEquals(expected, actual);

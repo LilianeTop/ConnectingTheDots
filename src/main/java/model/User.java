@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class User {
-    public static DBAccess dbAccess = Main.getDBAccess();
-    public static UserDAO userDAO = new UserDAO(dbAccess);
+    /*public static DBAccess dbAccess = Main.getDBAccess();
+    public static UserDAO userDAO = new UserDAO(dbAccess);*/
 
     private String firstName;
     private String prefix;
