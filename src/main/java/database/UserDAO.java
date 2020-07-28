@@ -59,6 +59,10 @@ public class UserDAO<E> extends AbstractDAO implements GenericDAO<E> {
         return (getOneByUsername(mpUserName) != null);
     }
 
+    public boolean checkIfEmailaddressExists(String mpEmailaddress){
+        return (getOneByEmailaddress(mpEmailaddress) != null);
+    }
+
     public User getOneByEmailaddress(String mpEmailaddress) {
         String sql = "SELECT * FROM User WHERE emailaddress = ?";
         User user = null;
@@ -87,7 +91,6 @@ public class UserDAO<E> extends AbstractDAO implements GenericDAO<E> {
         //fixme: how to adjust this to a generic method so  that I do NOT need to cast to user?
         String sql = "SELECT * FROM User";
         ArrayList<E> allUsersList = new ArrayList<>();
-        UserDAO userDAO = new UserDAO(dbAccess);
         User user;
         try {
             setupPreparedStatement(sql);
@@ -109,10 +112,35 @@ public class UserDAO<E> extends AbstractDAO implements GenericDAO<E> {
         return allUsersList;
     }
 
+    public ArrayList getAllByRole(String mpRole) {
+        String sql = "SELECT * FROM User WHERE role = ?";
+        ArrayList<User> allUsersByRoleList = new ArrayList<>();
+        User user;
+        try {
+            setupPreparedStatement(sql);
+            preparedStatement.setString(1, mpRole);
+            ResultSet resultSet = executeSelectStatement();
+            while (resultSet.next()) {
+                String firstName = resultSet.getString("firstName");
+                String prefix = resultSet.getString("prefix");
+                String lastName = resultSet.getString("lastName");
+                String emailaddress = resultSet.getString("emailaddress");
+                String userName = resultSet.getString("userName");
+                String password = resultSet.getString("password");
+                user = new User(firstName, prefix, lastName, emailaddress, mpRole, userName, password);
+                allUsersByRoleList.add(user);
+            }
+        } catch (SQLException e) {
+            System.out.println("SQL error " + e.getMessage());
+        }
+        return allUsersByRoleList;
+    }
+
+
     @Override
     public void updateOne(E mpUser) {
         User user = (User) mpUser;
-        String sql = "UPDATE Klant SET firstName = ?, prefix = ?, lastName = ?, emailaddress = ?, role = ?, password = ?  where userName = ?;";
+        String sql = "UPDATE User SET firstName = ?, prefix = ?, lastName = ?, emailaddress = ?, role = ?, password = ? WHERE userName = ? ";
         try {
             setupPreparedStatement(sql);
             preparedStatement.setString(1, user.getFirstName());

@@ -50,6 +50,10 @@ public class User {
         return String.valueOf(password);
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getRole() {
         return role;
     }
@@ -78,7 +82,11 @@ public class User {
         return emailaddress;
     }
 
-//TODO: get explained again why this is neccessarry
+    public void setEmailaddress(String emailaddress) {
+        this.emailaddress = emailaddress;
+    }
+
+    //TODO: get explained again why this is neccessarry
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
