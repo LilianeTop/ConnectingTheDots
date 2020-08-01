@@ -36,7 +36,5 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
         getSceneManager().showLoginScene();
-        //getSceneManager().showWelcomeScene();
-
     }
 }

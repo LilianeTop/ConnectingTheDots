@@ -18,7 +18,7 @@ class UserDAOTest {
     @Test
     void storeOneTest() {
         //fixme: check if the emailaddres is already in db if so you can't register twice with same emailaddress
-        User userToStore = new User("Mildred", "last", "Hope", "hope@gmail.com", "reader");
+        User userToStore = new User("Mildred", "last", "Hope", "hope6@gmail.com", "reader");
         userDAO.storeOne(userToStore);
         User userToStoreTest = userDAO.getOneByEmailaddress(userToStore.getEmailaddress());
         assertTrue(userToStore.equals(userToStoreTest));
@@ -48,7 +48,7 @@ class UserDAOTest {
         assertTrue(userToTest2.getFirstName().equals("Liliane"));
         assertTrue(userToTest2.getEmailaddress().equals("hallo@lilianetop.nl"));
         assertTrue(userToTest2.getRole().equals("admin"));
-        assertTrue(userToTest2.getPassword().equals("1234"));
+        assertTrue(userToTest2.getPassword().equals("Top1234"));
     }
 
     @Test

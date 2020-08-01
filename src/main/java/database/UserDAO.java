@@ -7,8 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class UserDAO<E> extends AbstractDAO implements GenericDAO<E> {
+
+    //private E user;
     public UserDAO(DBAccess dbAccess) {
         super(dbAccess);
+        //user = null;
     }
 
     @Override
@@ -156,13 +159,14 @@ public class UserDAO<E> extends AbstractDAO implements GenericDAO<E> {
         }
     }
 
-    //@Override
+    @Override
     //fixme: still do not understand how generics work and it is not working total confusion
-    public void deleteOne(User mpUser) {
+    public void deleteOne(E mpUser) {
+        User user = (User) mpUser;
         String sql = "DELETE FROM User WHERE userName = ?";
         try {
             setupPreparedStatement(sql);
-            preparedStatement.setString(1, mpUser.getUserName());
+            preparedStatement.setString(1, user.getUserName());
             executeManipulateStatement();
         } catch (SQLException error) {
             System.out.println("SQL error: " + error.getMessage());

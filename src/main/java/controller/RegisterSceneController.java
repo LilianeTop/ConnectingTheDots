@@ -6,6 +6,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import main.Main;
+import model.EmailValidator;
+import model.EmailWithLoginDetails;
 import model.User;
 
 public class RegisterSceneController {
@@ -13,6 +15,7 @@ public class RegisterSceneController {
     private DBAccess dbAccess;
     private User user;
     private String role = "reader";
+    EmailWithLoginDetails email;
 
 
     @FXML
@@ -47,6 +50,7 @@ public class RegisterSceneController {
 
     @FXML
     private void initialize(){
+
         readerRadioButton.setSelected(true);
     }
 
@@ -72,18 +76,19 @@ public class RegisterSceneController {
             Alert registered = new Alert(Alert.AlertType.INFORMATION);
             registered.setContentText("You are succesfully registered. Please check your inbox for login details");
             registered.show();
-            //TODO: sendConfirmationEmail();
+            new EmailWithLoginDetails().sendConfirmationEmail();
         }
     }
 
     private void createUser() {
         StringBuilder warningText = new StringBuilder();
+        EmailValidator emailValidator = new EmailValidator();
         boolean rightInput = true;
-        String firstName = firstNameTextfield.getText();
+        String firstName = firstNameTextfield.getText().replaceAll("\\s", "");//Fixme: delete spaces in string
         String prefix = prefixTextfield.getText();
-        String lastName = lastNameTextfield.getText();
+        String lastName = lastNameTextfield.getText().replaceAll("\\s", "");//Fixme: delete spaces in string
         String emailaddress = emailaddressTextfield.getText();
-        //Fixme: how to access radiobuttons? Create 3 times onAction to setRole()
+        //Fixme: how to access radiobuttons? Create 3 times onAction to setRole() is this the right way to do it?
         if (firstName.isEmpty()) {
             warningText.append("Please enter your first name\n");
             rightInput = false;
@@ -92,8 +97,8 @@ public class RegisterSceneController {
             warningText.append("Please enter your last name\n");
             rightInput = false;
         }
-        if (emailaddress.isEmpty()) {
-            warningText.append("Please enter your email address\n");
+        if (!emailValidator.isValid(emailaddress)) {
+            warningText.append("Please enter a valid email address\n");
             rightInput = false;
             //fixme: how to check if it is an email address? regex?
         }
@@ -110,7 +115,8 @@ public class RegisterSceneController {
     public void doLoginScene(ActionEvent actionEvent) {
         Main.getSceneManager().showLoginScene();
     }
-//fixme: this one can be deleted as the default value is reader
+
+
     public void setRoleToReader(ActionEvent actionEvent) {
         setRole("reader");
     }

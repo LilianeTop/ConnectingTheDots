@@ -1,17 +1,10 @@
 package model;
 
-import database.DBAccess;
-import database.UserDAO;
-import main.Main;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 public class User {
-    /*public static DBAccess dbAccess = Main.getDBAccess();
-    public static UserDAO userDAO = new UserDAO(dbAccess);*/
-
     private String firstName;
     private String prefix;
     private String lastName;
@@ -21,24 +14,22 @@ public class User {
     private String userName;
     private String password;
 
-
-    //fixme: if storeOne only is emails is not already in db
     //all-args constructor
     public User(String firstName, String prefix, String lastName, String emailaddress, String role, String userName, String password) {
         super();
-        this.firstName = firstName;
+       this.firstName = firstName;
         this.prefix = prefix;
         this.lastName = lastName;
         this.emailaddress = emailaddress;
         this.role = role;
         this.userName = userName;
         this.password = password;
-
     }
 
     //constructor to be used when registering otherwise the all-args constructor needs to be used to prevent from renewing username and password
     public User(String firstName, String prefix, String lastName, String emailaddress, String role) {
-        this(firstName, prefix, lastName, emailaddress, role, new UsernameGenerator().createUsername(firstName, lastName), new PasswordGenerator(new PasswordGenerator.PasswordGeneratorBuilder()).generate(10));
+        this(firstName , prefix, lastName, emailaddress, role, new UsernameGenerator().createUsername(firstName, lastName), new PasswordGenerator(new PasswordGenerator.PasswordGeneratorBuilder()).generate(10));
+
     }
 
 

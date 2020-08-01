@@ -40,6 +40,10 @@ class UserTest {
         actual = usernameGenerator.createUsername("Martje", "Teissen");
         assertEquals(expected, actual);
 
+        expected = "UpxMox001";
+        actual = usernameGenerator.createUsername("Mo", "Up");
+        assertEquals(expected, actual);
+
     }
 
     @Test
