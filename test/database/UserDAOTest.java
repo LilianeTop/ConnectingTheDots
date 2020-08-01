@@ -2,22 +2,40 @@ package database;
 
 import main.Main;
 import model.User;
-import org.junit.Assert;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserDAOTest {
-    UserDAO userDAO = new UserDAO(Main.getDBAccess());
+    public static UserDAO userDAO = new UserDAO(Main.getDBAccess());
+    public static List<User> userTestList;
 
     //fixme: refactor code as there is much duplication
     //fixme: find a procedure that makes testing easier as in delete the ones you stored etc. Is there an existing protocol to follow?
+    //Todo: find out how to use a testdb
+    @BeforeAll
+    public static void setUp(){
+        User user1 = new User("Maaike", "van der", "Made", "made@gmail.com", "reader");
+        User user2 = new User("Roxanne", null, "Lang", "ro@gmail.com", "storyteller");
+        User user3 = new User("Moira", "de", "Hoog", "moira@gmail.com", "reader");
+        User user4 = new User("Lydia", null, "Stokvis", "lydia.stokvis@gmail.com", "commenter");
+        User user5 = new User("Machteld", null, "Aardse", "m.aardse@hotmail.com", "storyteller");
 
+        userTestList = new ArrayList<>(Arrays.asList(user1, user2, user3, user4, user5));
+    }
+    @AfterEach
+    public void tearDown() {
+
+    }
     @Test
-    void storeOneTest() {
-        //fixme: check if the emailaddres is already in db if so you can't register twice with same emailaddress
+    //Fixme: tried to make it all static to have access to the users in the setUp but can't. No idea how this is suppose to work.
+    public static void storeOneTest() {
         User userToStore = new User("Mildred", "last", "Hope", "hope6@gmail.com", "reader");
         userDAO.storeOne(userToStore);
         User userToStoreTest = userDAO.getOneByEmailaddress(userToStore.getEmailaddress());
