@@ -70,9 +70,9 @@ public class SceneManager {
             }
             default: {
                 try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/welcomeScene.fxml"));
-                    Parent root = loader.load();//Fixme: location is not set, how can this be I haven't changed the project structure
-                    WelcomeSceneController controller = loader.getController();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/welcomeAdministratorScreen.fxml"));
+                    Parent root = loader.load();//Fixme: location is not set => forgotten to add / begin pathway but now it doesn't show anything
+                    WelcomeAdministratorScreenController controller = loader.getController();
                     controller.setup();
                     Scene scene = new Scene(root);
                     primaryStage.setScene(scene);
