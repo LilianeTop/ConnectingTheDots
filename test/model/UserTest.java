@@ -1,7 +1,5 @@
-package test;
+package model;
 
-import model.PasswordGenerator;
-import model.UsernameGenerator;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -47,6 +45,7 @@ class UserTest {
     }
 
     @Test
+    //fixme: how to test randomly created Strings?
     void createPassword() {
         PasswordGenerator passwordGenerator = new PasswordGenerator(new PasswordGenerator.PasswordGeneratorBuilder());
         for (int i = 0; i < 10; i++) {
