@@ -22,7 +22,7 @@ public class SceneManager {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
             AnchorPane root = loader.load();
-            if(LoginSceneController.currentUser != null) {
+            if (LoginSceneController.currentUser != null) {
                 Label label1 = new Label(LoginSceneController.currentUser.toString());
                 root.getChildren().add(label1);
             }
@@ -122,7 +122,7 @@ public class SceneManager {
     }
 
     public void showLinkHasBeenSent() {
-         try {
+        try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/linkHasBeenSentScene.fxml"));
             Parent root = loader.load();
             LinkHasBeenSentSceneController controller = loader.getController();
@@ -136,7 +136,7 @@ public class SceneManager {
     }
 
     public void showRegisterScene() {
-         try {
+        try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/registerScene.fxml"));
             Parent root = loader.load();
             RegisterSceneController controller = loader.getController();

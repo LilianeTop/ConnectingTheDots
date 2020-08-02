@@ -20,8 +20,7 @@ public class WelcomeSceneController {
     public void setup() {
         welcomeLabel.setText("Welcome " + LoginSceneController.currentUser.toString());
 
-        }
-
+    }
 
 
     public void doQuit(ActionEvent actionEvent) {
