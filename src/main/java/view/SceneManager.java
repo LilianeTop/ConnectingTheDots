@@ -35,11 +35,11 @@ public class SceneManager {
         }
     }
 
-    public void showLoginScene() {
+    public void showLoginScene() {//this one still works
         try {
-            FXMLLoader loader = new FXMLLoader((getClass().getResource("/view/fxml/loginScene.fxml")));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/loginScene.fxml"));
             Parent root = loader.load();
-            LoginSceneController controller = loader.getController();
+           // LoginSceneController controller = loader.getController();
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.show();
@@ -69,10 +69,19 @@ public class SceneManager {
                 break;
             }
             default: {
-                FXMLLoader loader = getScene("/view/fxml/welcomeAdministratorScreen");
-                WelcomeAdministratorScreenController controller = loader.getController();
-                controller.setup();
-                break;
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/welcomeScene.fxml"));
+                    Parent root = loader.load();//Fixme: location is not set, how can this be I haven't changed the project structure
+                    WelcomeSceneController controller = loader.getController();
+                    controller.setup();
+                    Scene scene = new Scene(root);
+                    primaryStage.setScene(scene);
+                    primaryStage.show();
+                    break;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
             }
         }
     }
