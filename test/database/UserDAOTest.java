@@ -2,7 +2,6 @@ package database;
 
 import main.Main;
 import model.User;
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
