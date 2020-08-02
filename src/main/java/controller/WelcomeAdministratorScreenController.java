@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 
-public class WelcomeSceneController {
+public class WelcomeAdministratorScreenController {
     private DBAccess dbAccess;
     private String role = LoginSceneController.currentRole;
 
@@ -20,7 +20,7 @@ public class WelcomeSceneController {
     public void setup() {
         welcomeLabel.setText("Welcome " + LoginSceneController.currentUser.toString());
 
-        }
+    }
 
 
 
@@ -28,3 +28,4 @@ public class WelcomeSceneController {
         System.exit(0);
     }
 }
+

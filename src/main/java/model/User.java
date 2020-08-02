@@ -13,6 +13,9 @@ public class User {
     public static List<String> roles = Arrays.asList("storyteller", "reader", "commenter", "admin");
     private String userName;
     private String password;
+    private static User currentUser;
+
+
 
     //all-args constructor
     public User(String firstName, String prefix, String lastName, String emailaddress, String role, String userName, String password) {
@@ -65,16 +68,16 @@ public class User {
         return roles;
     }
 
-    public static void setRoles(List<String> roles) {
-        User.roles = roles;
-    }
-
     public String getEmailaddress() {
         return emailaddress;
     }
 
     public void setEmailaddress(String emailaddress) {
         this.emailaddress = emailaddress;
+    }
+
+    public static void setCurrentUser(User currentUser) {
+        User.currentUser = currentUser;
     }
 
     //TODO: get explained again why this is neccessarry

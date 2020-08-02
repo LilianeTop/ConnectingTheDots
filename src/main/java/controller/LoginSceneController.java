@@ -13,9 +13,10 @@ import model.User;
 public class LoginSceneController {
     private UserDAO userDAO;
     private DBAccess dbAccess;
-    //private String userName;
-    //private String password;
+    private String userName;
+    private String password;
     public static String currentRole;
+    public static User currentUser;
 
     @FXML
     private TextField nameTextField;
@@ -37,8 +38,8 @@ public class LoginSceneController {
     public void doLogin(ActionEvent actionEvent) {
         StringBuilder warningText = new StringBuilder();
         boolean correctInput = true;
-        String userName = nameTextField.getText();
-        String password = passwordField.getText();
+        userName = nameTextField.getText();
+        password = passwordField.getText();
         User user = userDAO.getOneByUsername(userName);
         if (userName.isEmpty()) {
             warningText.append("Enter your username.\n");
@@ -53,6 +54,9 @@ public class LoginSceneController {
             error.setContentText(warningText.toString());
             error.show();
         } else {
+            currentUser = user;
+            User.setCurrentUser(currentUser);
+            currentRole = user.getRole();
             Main.getSceneManager().showWelcomeScene();
         }
     }

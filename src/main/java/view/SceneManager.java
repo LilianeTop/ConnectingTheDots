@@ -4,6 +4,8 @@ import controller.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,7 +21,11 @@ public class SceneManager {
         Scene scene;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
-            Parent root = loader.load();
+            AnchorPane root = loader.load();
+            if(LoginSceneController.currentUser != null) {
+                Label label1 = new Label(LoginSceneController.currentUser.toString());
+                root.getChildren().add(label1);
+            }
             scene = new Scene(root);
             primaryStage.setScene(scene);
             return loader;
@@ -34,7 +40,6 @@ public class SceneManager {
             FXMLLoader loader = new FXMLLoader((getClass().getResource("/view/fxml/loginScene.fxml")));
             Parent root = loader.load();
             LoginSceneController controller = loader.getController();
-            //controller.setup(); //er is nog geen setup() methode in de LoginController but I do not need this?
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.show();
@@ -45,16 +50,30 @@ public class SceneManager {
 
 
     public void showWelcomeScene() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/welcomeScene.fxml"));
-            Parent root = loader.load();
-            WelcomeSceneController controller = loader.getController();
-            controller.setup();
-            Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+        //after login show per role a welcome scene
+        switch (LoginSceneController.currentRole) {
+            case "reader": {
+                FXMLLoader loader = getScene("/view/fxml/welcomeReaderScreen");
+                WelcomeReaderScreenController controller = loader.getController();
+                //controller.setUp();
+                break;
+            }
+            case "commenter": {
+                FXMLLoader loader = getScene("/view/fxml/welcomeCommenterScreen");
+                WelcomeCommenterScreenController controller = loader.getController();
+                break;
+            }
+            case "storyteller": {
+                FXMLLoader loader = getScene("/view/fxml/welcomeStorytellerScreen");
+                WelcomeStorytellerScreenController controller = loader.getController();
+                break;
+            }
+            default: {
+                FXMLLoader loader = getScene("/view/fxml/welcomeAdministratorScreen");
+                WelcomeAdministratorScreenController controller = loader.getController();
+                controller.setup();
+                break;
+            }
         }
     }
 
