@@ -1,7 +1,7 @@
 package model;
 
-import database.DBAccess;
-import database.UserDAO;
+import database.mySQL.DBAccess;
+import database.mySQL.UserDAO;
 import main.Main;
 
 public class UsernameGenerator {

@@ -1,5 +1,6 @@
 package database;
 
+import database.mySQL.UserDAO;
 import main.Main;
 import model.User;
 

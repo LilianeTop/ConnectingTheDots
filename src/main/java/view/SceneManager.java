@@ -55,13 +55,14 @@ public class SceneManager {
                 break;
             }
             case "commenter": {
-                FXMLLoader loader = getScene("/view/fxml/welcomeCommenterScreen");
+                FXMLLoader loader = getScene("/view/fxml/welcomeCommenterScreen.fxml");
                 WelcomeCommenterScreenController controller = loader.getController();
                 break;
             }
             case "storyteller": {
-                FXMLLoader loader = getScene("/view/fxml/welcomeStorytellerScreen");
+                FXMLLoader loader = getScene("/view/fxml/welcomeStorytellerScreen.fxml");
                 WelcomeStorytellerScreenController controller = loader.getController();
+                controller.setUp();
                 break;
             }
             default: {
@@ -163,6 +164,25 @@ public class SceneManager {
 
     public void showReadStories() {
         FXMLLoader loader = getScene("/view/fxml/manageReadStories.fxml");
+        ManageNewStoriesController controller = loader.getController();
+        controller.setUp();
+    }
+
+    public void showUploadAStory() {
+        FXMLLoader loader = getScene("/view/fxml/manageUploadAStory.fxml");
+        ManageNewStoriesController controller = loader.getController();
+        controller.setUp();
+
+    }
+
+    public void showChangeAStorie() {
+        FXMLLoader loader = getScene("/view/fxml/manageChangeAStory.fxml");
+        ManageNewStoriesController controller = loader.getController();
+        controller.setUp();
+    }
+
+    public void showRemoveAStorie() {
+        FXMLLoader loader = getScene("/view/fxml/manageRemoveAStory.fxml");
         ManageNewStoriesController controller = loader.getController();
         controller.setUp();
     }

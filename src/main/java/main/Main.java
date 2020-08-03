@@ -1,6 +1,6 @@
 package main;
 
-import database.DBAccess;
+import database.mySQL.DBAccess;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import view.SceneManager;
@@ -29,6 +29,9 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public static void run() {
     }
 
 

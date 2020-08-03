@@ -1,14 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controller.WelcomeStorytellerScreenController"
-            prefHeight="400.0" prefWidth="600.0">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
+            prefWidth="900.0"
+            xmlns="http://javafx.com/javafx/10.0.02-internal"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.WelcomeStorytellerScreenController">
+    <children>
+        <Label layoutX="250.0" layoutY="40.0" prefHeight="54.0" prefWidth="900.0" text="Connecting The Dots" textFill="#c61414">
+            <font>
+                <Font size="36.0"/>
+            </font>
+        </Label>
+        <Label fx:id="welcomeLabel" layoutX="250.0" layoutY="90.0" text="Welcome user happy writing!">
+            <font>
+                <Font size="24.0"/>
+            </font>
+        </Label>
+        <MenuButton fx:id="taskMenuButton" layoutX="500.0" layoutY="200.0" mnemonicParsing="false" text="Please choose">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </MenuButton>
+        <Label layoutX="250.0" layoutY="200.0" text="What would you like to do?">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </Label>
+        <Button fx:id="logoutButton" layoutX="400.0" layoutY="250.0" mnemonicParsing="false" onAction="#doQuit"
+                text="Logout">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Button>
+        <Button fx:id="ReturnToLogin" layoutX="400.0" layoutY="300.0" mnemonicParsing="false" onAction="#doLogin"
+                text="Return to Login">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Button>
+    </children>
 
 </AnchorPane>
+

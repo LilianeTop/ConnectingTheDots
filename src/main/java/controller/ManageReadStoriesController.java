@@ -1,9 +1,19 @@
 package controller;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.ListView;
 import main.Main;
+import model.Story;
 
 public class ManageReadStoriesController {
+
+    @FXML
+    ListView<Story> storyListView;
+
+    public void setUp(){
+        //todo: retrieve all stories from dbCouch
+    }
     public void sortOnDate(ActionEvent actionEvent) {
     }
 

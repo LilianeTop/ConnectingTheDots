@@ -1,27 +1,21 @@
 package controller;
 
-import database.DBAccess;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import main.Main;
 
 public class WelcomeReaderScreenController {
-    private DBAccess dbAccess = Main.getDBAccess();
-    private String role = LoginSceneController.currentRole;
 
     @FXML
     private Label welcomeLabel;
-    @FXML
-    private Label subTitle;
+
     @FXML
     private MenuButton taskMenuButton;
-    @FXML
-    private Button logoutButton;
+
 
     public WelcomeReaderScreenController() {
         super();
