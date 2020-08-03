@@ -4,7 +4,6 @@ import controller.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -22,12 +21,9 @@ public class SceneManager {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
             AnchorPane root = loader.load();
-            if (LoginSceneController.currentUser != null) {
-                Label label1 = new Label(LoginSceneController.currentUser.toString());
-                root.getChildren().add(label1);
-            }
             scene = new Scene(root);
             primaryStage.setScene(scene);
+            primaryStage.show();
             return loader;
         } catch (IOException e) {
             e.printStackTrace();
@@ -53,9 +49,9 @@ public class SceneManager {
         //after login show per role a welcome scene
         switch (LoginSceneController.currentRole) {
             case "reader": {
-                FXMLLoader loader = getScene("/view/fxml/welcomeReaderScreen");
+                FXMLLoader loader = getScene("/view/fxml/welcomeReaderScreen.fxml");
                 WelcomeReaderScreenController controller = loader.getController();
-                //controller.setUp();
+                controller.setUp();
                 break;
             }
             case "commenter": {
@@ -88,7 +84,7 @@ public class SceneManager {
 
     public void showStoryListScene() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/manageStory.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/manageNewStories.fxml"));
             Parent root = loader.load();
             WelcomeSceneController controller = loader.getController();
             controller.setup();
@@ -156,5 +152,18 @@ public class SceneManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void showNewStories() {
+        FXMLLoader loader = getScene("/view/fxml/manageNewStories.fxml");
+        ManageNewStoriesController controller = loader.getController();
+        controller.setUp();
+
+    }
+
+    public void showReadStories() {
+        FXMLLoader loader = getScene("/view/fxml/manageReadStories.fxml");
+        ManageNewStoriesController controller = loader.getController();
+        controller.setUp();
     }
 }

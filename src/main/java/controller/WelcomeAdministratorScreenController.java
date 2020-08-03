@@ -8,7 +8,7 @@ import javafx.scene.control.MenuButton;
 import main.Main;
 
 public class WelcomeAdministratorScreenController {
-    private DBAccess dbAccess;
+    private DBAccess dbAccess = Main.getDBAccess();
     private String role = LoginSceneController.currentRole;
 
     @FXML
@@ -20,7 +20,6 @@ public class WelcomeAdministratorScreenController {
 
     public WelcomeAdministratorScreenController() {
         super();
-        this.dbAccess = Main.getDBAccess();
     }
 
     public void setup() {
@@ -33,6 +32,10 @@ public class WelcomeAdministratorScreenController {
 
     public void doQuit(ActionEvent actionEvent) {
         System.exit(0);
+    }
+
+    public void doLogIn(ActionEvent actionEvent) {
+        Main.getSceneManager().showLoginScene();
     }
 }
 

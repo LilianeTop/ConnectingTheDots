@@ -41,11 +41,11 @@ public class LoginSceneController {
         userName = nameTextField.getText();
         password = passwordField.getText();
         User user = userDAO.getOneByUsername(userName);
-        if (userName.isEmpty()) {
-            warningText.append("Enter your username.\n");
+        if (user == null) {
+            warningText.append("Please enter your username.\n");
             correctInput = false;
         }
-        if (!user.getPassword().equals(password)) {
+        else if (!user.getPassword().equals(password) || user.getPassword().isEmpty()) {
             warningText.append("Username in combination with password is not valid.");
             correctInput = false;
         }

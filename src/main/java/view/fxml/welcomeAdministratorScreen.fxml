@@ -10,16 +10,16 @@
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="controller.WelcomeAdministratorScreenController">
     <children>
-        <Label layoutX="250.0" layoutY="40.0" prefHeight="54.0" prefWidth="900.0" text="Connecting The Dots">
+        <Label layoutX="250.0" layoutY="40.0" prefHeight="54.0" prefWidth="900.0" text="Connecting The Dots" textFill="#c61414">
             <font>
                 <Font size="36.0"/>
             </font>
         </Label>
-        <Label fx:id="welcomeLabel" layoutX="250.0" layoutY="90.0" text="Welcome user happy reading!">
-            <font>
-                <Font size="24.0"/>
-            </font>
-        </Label>
+         <Label fx:id="welcomeLabel" layoutX="250.0" layoutY="90.0" text="Welcome user happy reading!">
+             <font>
+                 <Font size="24.0"/>
+             </font>
+         </Label>
 
         <MenuButton fx:id="taskMenuButton" layoutX="500.0" layoutY="200.0" mnemonicParsing="false" text="Please choose">
             <font>
@@ -33,6 +33,12 @@
         </Label>
         <Button fx:id="logoutButton" layoutX="400.0" layoutY="250.0" mnemonicParsing="false" onAction="#doQuit"
                 text="Logout">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Button>
+        <Button fx:id="ReturnToLogin" layoutX="400.0" layoutY="300.0" mnemonicParsing="false" onAction="#doLogIn"
+                text="Return to Login">
             <font>
                 <Font size="14.0"/>
             </font>

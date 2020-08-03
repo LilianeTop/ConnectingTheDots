@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
+            prefWidth="900.0"
+            xmlns="http://javafx.com/javafx/10.0.02-internal"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.ManageReadStoriesController">
+    <children>
+        <Label layoutX="250.0" layoutY="40.0" prefHeight="54.0" prefWidth="900.0" text="Connecting The Dots"
+               textFill="#c61414">
+            <font>
+                <Font size="36.0"/>
+            </font>
+        </Label>
+        <Label layoutX="250.0" layoutY="90.0" text="Please select a story to reread.">
+            <font>
+                <Font size="24.0"/>
+            </font>
+        </Label>
+        <ListView fx:id="latestStories" layoutX="250.0" layoutY="150.0" prefHeight="300.0" prefWidth="400.0"/>
+        <Button layoutX="700.0" layoutY="200.0" prefWidth="130" mnemonicParsing="false" onAction="#sortOnDate" text="Sort on Date">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Button>
+        <Button layoutX="700.0" layoutY="260.0" prefWidth="130.0" mnemonicParsing="false" onAction="#sortByStoryTeller" text="Sort by Storyteller">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Button>
+        <Button layoutX="700.0" layoutY="320.0" prefWidth="130" mnemonicParsing="false" onAction="#sortByTitle" text="Sort by Title">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Button>
+        <Button layoutX="700.0" layoutY="380.0" prefWidth="130" mnemonicParsing="false" onAction="#sortBySubject" text="Sort by Subject">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Button>
+        <Button fx:id="logoutButton" layoutX="315.0" layoutY="475.0" prefWidth="130" mnemonicParsing="false" onAction="#doQuit"
+                text="Logout">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Button>
+        <Button fx:id="returnButton" layoutX="465" layoutY="475.0" prefWidth="130" mnemonicParsing="false" onAction="#returnToMenu"
+                text="Return to Menu">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Button>
+    </children>
+
+</AnchorPane>
