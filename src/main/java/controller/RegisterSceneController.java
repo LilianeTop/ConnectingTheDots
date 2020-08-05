@@ -37,7 +37,7 @@ public class RegisterSceneController {
     private TextField emailaddressTextfield;
 
     @FXML
-    private  ToggleGroup toggleGroup;
+    private ToggleGroup toggleGroup;
 
     @FXML
     private RadioButton readerRadioButton;
@@ -49,8 +49,7 @@ public class RegisterSceneController {
     private RadioButton storytellerRadioButton;
 
     @FXML
-    private void initialize(){
-
+    private void initialize() {
         readerRadioButton.setSelected(true);
     }
 
@@ -84,9 +83,9 @@ public class RegisterSceneController {
         StringBuilder warningText = new StringBuilder();
         EmailValidator emailValidator = new EmailValidator();
         boolean rightInput = true;
-        String firstName = firstNameTextfield.getText().replaceAll("\\s", "");//Fixme: delete spaces in string
+        String firstName = firstNameTextfield.getText().replaceAll("\\s", "");
         String prefix = prefixTextfield.getText();
-        String lastName = lastNameTextfield.getText().replaceAll("\\s", "");//Fixme: delete spaces in string
+        String lastName = lastNameTextfield.getText().replaceAll("\\s", "");
         String emailaddress = emailaddressTextfield.getText();
         //Fixme: how to access radiobuttons? Create 3 times onAction to setRole() is this the right way to do it?
         if (firstName.isEmpty()) {
@@ -100,7 +99,6 @@ public class RegisterSceneController {
         if (!emailValidator.isValid(emailaddress)) {
             warningText.append("Please enter a valid email address\n");
             rightInput = false;
-            //fixme: how to check if it is an email address? regex?
         }
         if (!rightInput) {
             Alert errorMessage = new Alert(Alert.AlertType.ERROR);
@@ -115,7 +113,6 @@ public class RegisterSceneController {
     public void doLoginScene(ActionEvent actionEvent) {
         Main.getSceneManager().showLoginScene();
     }
-
 
     public void setRoleToReader(ActionEvent actionEvent) {
         setRole("reader");

@@ -49,8 +49,9 @@ public class UserDAO<E> extends AbstractDAO implements GenericDAO<E> {
                 String lastName = resultSet.getString("lastName");
                 String emailaddress = resultSet.getString("emailaddress");
                 String role = resultSet.getString("role");
+                String userName = resultSet.getString("userName");
                 String password = resultSet.getString("password");
-                user = new User(firstName, prefix, lastName, emailaddress, role, mpUsername, password);
+                user = new User(firstName, prefix, lastName, emailaddress, role, userName, password);
             }
         } catch (SQLException error) {
             System.out.println("This username does not exist");

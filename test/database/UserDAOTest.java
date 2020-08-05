@@ -119,9 +119,8 @@ class UserDAOTest {
         Boolean usernameToCheck = userDAO.checkIfUsernameExists("chopMil001");
         assertFalse(usernameToCheck);
 
-        //why is it not case sensitive?
         Boolean usernameToCheck2 = userDAO.checkIfUsernameExists("hopMil001");
-        assertTrue(usernameToCheck2);//should be false
+        assertFalse(usernameToCheck2);
 
         /*Boolean usernameToCheck3 = userDAO.checkIfUsernameExists(userTestList.get(4).getUserName());
         assertTrue(usernameToCheck3);//why is this not working?
