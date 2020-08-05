@@ -39,15 +39,13 @@ public class LoginSceneController {
 
 
     public void doLogin(ActionEvent actionEvent) {
-        userNameInput = nameTextField.getText();
-        passwordInput = passwordField.getText();
-        user = userDAO.getOneByUsername(userNameInput);
-        if (user == null) {
-            warningText.append("Please enter your username.\n");
-            correctInput = false;
-
-        } else if (!user.getPassword().equals(passwordInput)) {
-            warningText.append("Please enter your password.\n");
+        StringBuilder warningText = new StringBuilder();
+        boolean correctInput = true;
+        userName = nameTextField.getText();
+        password = passwordField.getText();
+        User user = userDAO.getOneByUsername(userName);
+        if (user == null || !user.getUserName().equals(userName) || (user != null && !user.getPassword().equals(password))) {
+            warningText.append("Username in combination with password is not valid.\n");
             correctInput = false;
         }
         if (!correctInput) {
@@ -61,6 +59,7 @@ public class LoginSceneController {
             Main.getSceneManager().showWelcomeScene();
         }
     }
+
 
     public void doQuit(ActionEvent actionEvent) {
         System.exit(0);
