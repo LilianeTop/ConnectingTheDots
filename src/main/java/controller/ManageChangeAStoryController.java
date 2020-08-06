@@ -27,7 +27,7 @@ public class ManageChangeAStoryController {
     }
 
     public void setUp(){
-        this.couchDBStoryDAO = new CouchDBStoryDAO();
+        this.couchDBStoryDAO = new CouchDBStoryDAO(couchDBAccess);
         //todo: create a methode to retrieve the stories per storyteller
       /*  for(Story story : couchDBStoryDAO.getAllStoriesByStoryteller(userDAO.getOneByUsername())){
             storyListView.getItems().add(story);

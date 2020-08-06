@@ -1,26 +1,32 @@
 package model;
 
+import java.util.Date;
+
 public class Story {
     private int storyID;
     private String title;
     private String subTitle;
+    private String subject;
     private String summary;
     private String content;
     private User storyTeller;
+    private Date date;
 
-    public Story(int storyID, String title, String subTitle, String summary, String content, User storyTeller) {
+    public Story(int storyID, String title, String subTitle, String subject, String summary, String content, User storyTeller, Date date) {
         super();
         this.storyID = storyID;
         this.title = title;
         this.subTitle = subTitle;
+        this.subject = subject;
         this.summary = summary;
         this.content = content;
         this.storyTeller = storyTeller;
+        this.date = date;
     }
 
-    //constructor without ID for DAO
-    public Story(String title, String subTitle, String summary, String content, User storyTeller) {
-        this(0, title,subTitle, summary, content, storyTeller);
+    //constructor without ID for DAO CouchDB must create an ID and publishing date
+    public Story(String title, String subTitle, String subject, String summary, String content, User storyTeller) {
+        this(0, title, subTitle, subject, summary, content, storyTeller, null);
     }
 
     public int getStoryID() {
@@ -47,6 +53,14 @@ public class Story {
         this.subTitle = subTitle;
     }
 
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
     public String getSummary() {
         return summary;
     }
@@ -71,6 +85,14 @@ public class Story {
         this.storyTeller = storyTeller;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         StringBuilder resultString = new StringBuilder("");
@@ -79,4 +101,6 @@ public class Story {
         resultString.append("story by " + storyTeller.getLastName());
         return resultString.toString();
     }
+
+
 }
