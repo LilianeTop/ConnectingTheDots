@@ -40,7 +40,7 @@ public class Main extends Application {
         launch(args);
     }
 
-//Handles connection to CouchDB
+    //Handles connection to CouchDB
     public static void run() {
         couchDBAccess = new CouchDBAccess();
         couchDBStoryDAO = new CouchDBStoryDAO(couchDBAccess);
@@ -48,7 +48,7 @@ public class Main extends Application {
         try {
             couchDBAccess.setUpConnection();
             System.out.println("Connection open to CouchDB");
-        } catch (Exception error){
+        } catch (Exception error) {
             System.out.println("\n Something went wrong\n");
             error.getMessage();
             error.printStackTrace();

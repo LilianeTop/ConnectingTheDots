@@ -35,7 +35,7 @@ public class WelcomeStorytellerScreenController {
         changeAStory.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                Main.getSceneManager().showChangeAStorie();
+                Main.getSceneManager().showChangeAStory();
             }
         });
         taskMenuButton.getItems().add(changeAStory);

@@ -10,67 +10,65 @@
             xmlns="http://javafx.com/javafx/10.0.02-internal"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="controller.ManageUploadAStoryController">
-    <children>
-        <Label layoutX="250.0" layoutY="40.0" prefHeight="54.0" prefWidth="900.0" text="Connecting The Dots"
-               textFill="#c61414">
-            <font>
-                <Font size="36.0"/>
-            </font>
-        </Label>
-        <Label layoutX="250.0" layoutY="90.0" text="Please upload your story">
-            <font>
-                <Font size="24.0"/>
-            </font>
-        </Label>
-        <TextField fx:id="storyTitleTextfield" layoutX="250.0" layoutY="150.0" prefHeight="25.0" prefWidth="335.0"/>
-        <Label layoutX="154.0" layoutY="150.0" text="Story title:">
-            <font>
-                <Font size="18.0"/>
-            </font>
-        </Label>
-        <TextField fx:id="storySubtitleTextfield" layoutX="250.0" layoutY="185.0" prefHeight="25.0" prefWidth="335.0"/>
-        <Label layoutX="154.0" layoutY="185.0" text="Subtitle:">
-            <font>
-                <Font size="18.0"/>
-            </font>
-        </Label>
-        <TextField fx:id="subjectTextfield" layoutX="250.0" layoutY="220.0" prefHeight="25.0" prefWidth="335.0"/>
-        <Label layoutX="154.0" layoutY="220.0" text="Subject:">
-            <font>
-                <Font size="18.0"/>
-            </font>
-        </Label>
-        <TextField fx:id="dateTextfield" layoutX="250.0" layoutY="255.0" prefHeight="25.0" prefWidth="335.0"/>
-        <Label layoutX="154.0" layoutY="255.0" text="Date:">
-            <font>
-                <Font size="18.0"/>
-            </font>
-        </Label>
-        <TextField fx:id="summaryTextfield" layoutX="250.0" layoutY="290.0" prefHeight="50.0" prefWidth="335.0"/>
-        <Label layoutX="154.0" layoutY="290.0" text="Summary:">
+    <Label layoutX="250.0" layoutY="40.0" prefHeight="54.0" prefWidth="900.0" text="Connecting The Dots"
+           textFill="#c61414">
+        <font>
+            <Font size="36.0"/>
+        </font>
+    </Label>
+    <Label layoutX="250.0" layoutY="90.0" text="Please upload your story">
+        <font>
+            <Font size="24.0"/>
+        </font>
+    </Label>
+    <TextField fx:id="titleTextfield" layoutX="250.0" layoutY="150.0" prefHeight="25.0" prefWidth="335.0"/>
+    <Label layoutX="154.0" layoutY="150.0" text="Story title:">
         <font>
             <Font size="18.0"/>
         </font>
-        </Label>
-        <TextField fx:id="StoryContentTextfield" layoutX="250.0" layoutY="350.0" prefHeight="175.0" prefWidth="335.0"/>
-        <Label layoutX="154.0" layoutY="350.0" text="Content:">
-            <font>
-                <Font size="18.0"/>
-            </font>
-        </Label>
-        <Button fx:id="uploadButton" layoutX="275.0" layoutY="535.0" prefWidth="130" mnemonicParsing="false"
-                onAction="#saveStory"
-                text="Upload">
-            <font>
-                <Font size="14.0"/>
-            </font>
-        </Button>
-        <Button fx:id="returnButton" layoutX="430" layoutY="535.0" prefWidth="130" mnemonicParsing="false"
-                onAction="#returnToMenu"
-                text="Return to Menu">
-            <font>
-                <Font size="14.0"/>
-            </font>
-        </Button>
-    </children>
+    </Label>
+    <TextField fx:id="subtitleTextfield" layoutX="250.0" layoutY="185.0" prefHeight="25.0" prefWidth="335.0"/>
+    <Label layoutX="154.0" layoutY="185.0" text="Subtitle:">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </Label>
+    <TextField fx:id="subjectTextfield" layoutX="250.0" layoutY="220.0" prefHeight="25.0" prefWidth="335.0"/>
+    <Label layoutX="154.0" layoutY="220.0" text="Subject:">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </Label>
+    <TextField fx:id="dateTextfield" layoutX="250.0" layoutY="255.0" prefHeight="25.0" prefWidth="335.0"/>
+    <Label layoutX="154.0" layoutY="255.0" text="Date:">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </Label>
+    <TextField fx:id="summaryTextfield" layoutX="250.0" layoutY="290.0" prefHeight="50.0" prefWidth="335.0"/>
+    <Label layoutX="154.0" layoutY="290.0" text="Summary:">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </Label>
+    <TextField fx:id="contentTextfield" layoutX="250.0" layoutY="350.0" prefHeight="175.0" prefWidth="335.0"/>
+    <Label layoutX="154.0" layoutY="350.0" text="Content:">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </Label>
+    <Button fx:id="uploadButton" layoutX="275.0" layoutY="535.0" prefWidth="130" mnemonicParsing="false"
+            onAction="#uploadAStory"
+            text="Upload">
+        <font>
+            <Font size="14.0"/>
+        </font>
+    </Button>
+    <Button fx:id="returnButton" layoutX="430" layoutY="535.0" prefWidth="130" mnemonicParsing="false"
+            onAction="#returnToMenu"
+            text="Return to Menu">
+        <font>
+            <Font size="14.0"/>
+        </font>
+    </Button>
 </AnchorPane>

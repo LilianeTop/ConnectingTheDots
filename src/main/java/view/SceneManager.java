@@ -31,7 +31,7 @@ public class SceneManager {
         }
     }
 
-    public void showLoginScene() {//this one still works
+    public void showLoginScene() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/loginScene.fxml"));
             Parent root = loader.load();
@@ -170,12 +170,12 @@ public class SceneManager {
 
     public void showUploadAStory() {
         FXMLLoader loader = getScene("/view/fxml/manageUploadAStory.fxml");
-        ManageNewStoriesController controller = loader.getController();
+        ManageUploadAStoryController controller = loader.getController();
         controller.setUp();
 
     }
 
-    public void showChangeAStorie() {
+    public void showChangeAStory() {
         FXMLLoader loader = getScene("/view/fxml/manageChangeAStory.fxml");
         ManageNewStoriesController controller = loader.getController();
         controller.setUp();

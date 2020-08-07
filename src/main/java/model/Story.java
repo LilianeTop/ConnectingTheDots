@@ -1,7 +1,5 @@
 package model;
 
-import java.util.Date;
-
 public class Story {
     private int storyID;
     private String title;
@@ -10,9 +8,9 @@ public class Story {
     private String summary;
     private String content;
     private User storyTeller;
-    private Date date;
+    private String date;
 
-    public Story(int storyID, String title, String subTitle, String subject, String summary, String content, User storyTeller, Date date) {
+    public Story(int storyID, String title, String subTitle, String subject, String date, String summary, String content, User storyTeller) {
         super();
         this.storyID = storyID;
         this.title = title;
@@ -25,9 +23,11 @@ public class Story {
     }
 
     //constructor without ID for DAO CouchDB must create an ID and publishing date
-    public Story(String title, String subTitle, String subject, String summary, String content, User storyTeller) {
-        this(0, title, subTitle, subject, summary, content, storyTeller, null);
+    public Story(String title, String subTitle, String subject, String date, String summary, String content, User storyTeller) {
+        this(0, title, subTitle, subject, date, summary, content, storyTeller);
     }
+
+
 
     public int getStoryID() {
         return storyID;
@@ -85,11 +85,11 @@ public class Story {
         this.storyTeller = storyTeller;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
