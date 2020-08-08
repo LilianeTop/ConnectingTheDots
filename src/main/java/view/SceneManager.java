@@ -170,7 +170,7 @@ public class SceneManager {
 
     public void showUploadAStory() {
         FXMLLoader loader = getScene("/view/fxml/manageUploadAStory.fxml");
-        ManageUploadAStoryController controller = loader.getController();
+        ManageNewStoriesController controller = loader.getController();
         controller.setUp();
 
     }

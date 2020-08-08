@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import database.couchDB.CouchDBAccess;
+import database.couchDB.CouchDBStoryDAO;
 import database.mySQL.UserDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -36,6 +37,7 @@ public class ManageUploadAStoryController {
     private User currentUser;
     private Story story;
     private UserDAO userDAO;
+    private CouchDBStoryDAO couchDBStoryDAO;
     private CouchDBAccess couchDBAccess;
     private Gson gson;
 
@@ -45,8 +47,8 @@ public class ManageUploadAStoryController {
         gson = new Gson();
     }
 
-  public void setUp() {
-
+    public void setUp() {
+        this.couchDBStoryDAO = new CouchDBStoryDAO(couchDBAccess);
     }
 
     //Todo: ask Maria how this works. why is it not void? what does line 26- 30 do?
@@ -64,7 +66,7 @@ public class ManageUploadAStoryController {
         Main.getSceneManager().showWelcomeScene();
     }
 
-
+    @FXML
     public void uploadAStory(ActionEvent actionEvent) {
         createStory();
         saveAStory(story);
@@ -72,8 +74,6 @@ public class ManageUploadAStoryController {
         storySaved.setContentText("Your story has been uploaded");
         storySaved.show();
     }
-
-
 
     private void createStory() {
         StringBuilder warningText = new StringBuilder();
