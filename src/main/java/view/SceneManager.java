@@ -97,19 +97,7 @@ public class SceneManager {
         }
     }
 
-    public void showAddStoryScene() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/createUpdateStory.fxml"));
-            Parent root = loader.load();
-            WelcomeSceneController controller = loader.getController();
-            controller.setup();
-            Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
 
     public void showRetrievePasswordScene() {
         /*FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/retrievePasswordScene.fxml"));
@@ -164,26 +152,26 @@ public class SceneManager {
 
     public void showReadStories() {
         FXMLLoader loader = getScene("/view/fxml/manageReadStories.fxml");
-        ManageNewStoriesController controller = loader.getController();
+        ManageReadStoriesController controller = loader.getController();
         controller.setUp();
     }
 
     public void showUploadAStory() {
         FXMLLoader loader = getScene("/view/fxml/manageUploadAStory.fxml");
-        ManageNewStoriesController controller = loader.getController();
+        ManageUploadAStoryController controller = loader.getController();
         controller.setUp();
 
     }
 
     public void showChangeAStory() {
         FXMLLoader loader = getScene("/view/fxml/manageChangeAStory.fxml");
-        ManageNewStoriesController controller = loader.getController();
+        ManageChangeAStoryController controller = loader.getController();
         controller.setUp();
     }
 
     public void showRemoveAStorie() {
         FXMLLoader loader = getScene("/view/fxml/manageRemoveAStory.fxml");
-        ManageNewStoriesController controller = loader.getController();
+        ManageRemoveAStoryController controller = loader.getController();
         controller.setUp();
     }
 }

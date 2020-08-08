@@ -1,9 +1,13 @@
 package controller;
 
+import database.couchDB.CouchDBAccess;
+import database.couchDB.CouchDBStoryDAO;
 import javafx.event.ActionEvent;
 import main.Main;
 
 public class ManageRemoveAStoryController {
+    CouchDBStoryDAO couchDBStoryDAO;
+    CouchDBAccess couchDBAccess;
    /* public void updateAStory(ActionEvent actionEvent) {
         //todo: find out how to retrieve a story from dbCouch and remove it
 
@@ -21,5 +25,9 @@ public class ManageRemoveAStoryController {
 
     public void returnToMenu(ActionEvent actionEvent) {
         Main.getSceneManager().showWelcomeScene();
+    }
+
+    public void setUp() {
+        this.couchDBStoryDAO = new CouchDBStoryDAO(couchDBAccess);
     }
 }

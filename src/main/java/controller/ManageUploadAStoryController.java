@@ -16,6 +16,11 @@ import model.Story;
 import model.User;
 
 public class ManageUploadAStoryController {
+    private User currentUser;
+    private Story story;
+    private UserDAO userDAO;
+    private CouchDBAccess couchDBAccess;
+    private Gson gson;
 
     @FXML
     private Button returnButton;
@@ -34,25 +39,22 @@ public class ManageUploadAStoryController {
     @FXML
     private TextField contentTextfield;
 
-    private User currentUser;
-    private Story story;
-    private UserDAO userDAO;
-    private CouchDBStoryDAO couchDBStoryDAO;
-    private CouchDBAccess couchDBAccess;
-    private Gson gson;
 
-    public ManageUploadAStoryController(CouchDBAccess couchDBAccess) {
+    public ManageUploadAStoryController() {
         super();
-        this.couchDBAccess = couchDBAccess;
+        //this.couchDBAccess = couchDBAccess;
+        setUp();
         gson = new Gson();
     }
 
     public void setUp() {
-        this.couchDBStoryDAO = new CouchDBStoryDAO(couchDBAccess);
+
+        CouchDBStoryDAO couchDBStoryDAO = new CouchDBStoryDAO(couchDBAccess);
     }
 
     //Todo: ask Maria how this works. why is it not void? what does line 26- 30 do?
     //Todo: how to test this?
+
     public String saveAStory(Story mpStory) {
         //Todo: upload story to dbCouch include the details of the storyTeller and publishing date
         String storyToSave = gson.toJson(mpStory);
@@ -62,6 +64,7 @@ public class ManageUploadAStoryController {
         return doc_Id;
     }
 
+    @FXML
     public void returnToMenu(ActionEvent actionEvent) {
         Main.getSceneManager().showWelcomeScene();
     }
