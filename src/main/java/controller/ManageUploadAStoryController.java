@@ -48,7 +48,6 @@ public class ManageUploadAStoryController {
     }
 
     public void setUp() {
-
         CouchDBStoryDAO couchDBStoryDAO = new CouchDBStoryDAO(couchDBAccess);
     }
 
