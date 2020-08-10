@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import model.Story;
+import model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,8 @@ public class CouchDBStoryDAO {
         String doc_Id = couchDBAccess.saveDocument(jsonObject);
         return doc_Id;
     }
-//or should it not be a story but a JsonObject?
+
+    //or should it not be a story but a JsonObject?
     public Story getAStoryByDocId(String docId) {
         JsonObject jsonObject = couchDBAccess.getCouchDbClient().find(JsonObject.class, docId);
         Story result = gson.fromJson(jsonObject, Story.class);
@@ -44,26 +46,26 @@ public class CouchDBStoryDAO {
         }
     }
 
-    private void deleteAStoryByStoryTeller(String mpStoryteller, String mpStoryTitle) {
-        List<Story> storiesByStorytellerList = getAllStoriesByStoryteller(mpStoryteller);
-        for(Story story : storiesByStorytellerList)
-        if (story.getTitle().equals(mpStoryTitle)) {
-            couchDBAccess.getCouchDbClient().remove(story);
-        }
-    }
-
-    private void deleteAllStoriesByStoryteller(String mpStoryteller) {
-        List<Story> storiesByStorytellerList = getAllStoriesByStoryteller(mpStoryteller);
-        for(Story story : storiesByStorytellerList)
+   /* private void deleteAStoryByStoryTeller(String mpStoryteller, String mpStoryTitle) {
+        List<Story> storiesByStorytellerList = getStoriesByStoryteller(mpStoryteller);
+        for (Story story : storiesByStorytellerList)
+            if (story.getTitle().equals(mpStoryTitle)) {
                 couchDBAccess.getCouchDbClient().remove(story);
-    }
+            }
+    }*/
 
-    //Todo: check why it is JsonObject and not Story?
+   /* private void deleteAllStoriesByStoryteller(String mpStoryteller) {
+        List<Story> storiesByStorytellerList = getStoriesByStoryteller(mpStoryteller);
+        for (Story story : storiesByStorytellerList)
+            couchDBAccess.getCouchDbClient().remove(story);
+    }*/
+
+
     public List<JsonObject> getAllStories() {
         return couchDBAccess.getCouchDbClient().view("_all_docs").includeDocs(true).query(JsonObject.class);
     }
 
-    public List<Story> getAllStoriesByDate(String mpDate) {
+    /*public List<Story> getAllStoriesByDate(String mpDate) {
         Story result = null;
         List<Story> storiesByDateList = new ArrayList<>();
         for (JsonObject jsonObject : getAllStories()) {
@@ -73,9 +75,9 @@ public class CouchDBStoryDAO {
             }
         }
         return storiesByDateList;
-    }
+    }*/
 
-    public List<Story> getAllStoriesBySubject(String mpSubject) {
+    /*public List<Story> getAllStoriesBySubject(String mpSubject) {
         Story result = null;
         List<Story> storiesBySubjectList = new ArrayList<>();
         for (JsonObject jsonObject : getAllStories()) {
@@ -85,21 +87,23 @@ public class CouchDBStoryDAO {
             }
         }
         return storiesBySubjectList;
-    }
+    }*/
 
-    public List<Story> getAllStoriesByStoryteller(String mpStoryteller) {
-        Story result = null;
-        List<Story> storiesByStorytellerList = new ArrayList<>();
+    public List<Story> getStoriesByStoryteller(User mpStoryteller) {
+        List<Story> result = new ArrayList<>();
+        Story tempStory;
         for (JsonObject jsonObject : getAllStories()) {
-            result = gson.fromJson(jsonObject, Story.class);
-            if (result.getStoryTeller().equals(mpStoryteller)) {
-                storiesByStorytellerList.add(result);
+            if (jsonObject.has("storyTeller")) {
+                tempStory = gson.fromJson(jsonObject, Story.class);
+                if (tempStory.getStoryTeller().equals(mpStoryteller)) {
+                    result.add(tempStory);
+                }
             }
         }
-        return storiesByStorytellerList;
+        return result;
     }
 
-    public List<Story> getAllStoriesByTitle(String mpTitle) {
+   /* public List<Story> getAllStoriesByTitle(String mpTitle) {
         Story result = null;
         List<Story> storiesByTitleList = new ArrayList<>();
         for (JsonObject jsonObject : getAllStories()) {
@@ -109,5 +113,5 @@ public class CouchDBStoryDAO {
             }
         }
         return storiesByTitleList;
-    }
+    }*/
 }

@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
+import model.Story;
 
 public class WelcomeSceneController {
     private DBAccess dbAccess;
@@ -17,7 +18,7 @@ public class WelcomeSceneController {
     @FXML
     private MenuButton taskMenuButton;
 
-    public void setup() {
+    public void setup(Story story) {
         welcomeLabel.setText("Welcome " + LoginSceneController.currentUser.toString());
 
     }

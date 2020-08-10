@@ -41,14 +41,6 @@ public class Story {
 
 
 
-    public int getStoryID() {
-        return storyID;
-    }
-
-    public void setStoryID(int storyID) {
-        this.storyID = storyID;
-    }
-
     public String getTitle() {
         return title;
     }
@@ -108,9 +100,8 @@ public class Story {
     @Override
     public String toString() {
         StringBuilder resultString = new StringBuilder("");
-        resultString.append(storyID + " ");
         resultString.append(title + " ");
-        resultString.append("story by " + storyTeller.getLastName());
+        resultString.append("story by " + storyTeller.getFirstName() + " " + storyTeller.getLastName());
         return resultString.toString();
     }
 

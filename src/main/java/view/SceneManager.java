@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.Story;
 
 import java.io.IOException;
 
@@ -83,18 +84,21 @@ public class SceneManager {
         }
     }
 
-    public void showStoryListScene() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/manageNewStories.fxml"));
+    public void showStoryListScene(Story story) {
+        FXMLLoader loader = getScene("/view/fxml/manageChangeAStory.fxml");
+        ManageChangeAStoryController controller = loader.getController();
+        controller.setUp();
+       /* try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/ManageChangeAStory.fxml"));
             Parent root = loader.load();
-            WelcomeSceneController controller = loader.getController();
-            controller.setup();
+            ManageChangeAStoryController = loader.getController();
+            controller.setup(story);
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
 
@@ -169,7 +173,7 @@ public class SceneManager {
         controller.setUp();
     }
 
-    public void showRemoveAStorie() {
+    public void showRemoveAStory() {
         FXMLLoader loader = getScene("/view/fxml/manageRemoveAStory.fxml");
         ManageRemoveAStoryController controller = loader.getController();
         controller.setUp();

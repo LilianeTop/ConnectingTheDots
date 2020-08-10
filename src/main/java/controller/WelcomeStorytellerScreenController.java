@@ -44,7 +44,7 @@ public class WelcomeStorytellerScreenController {
         removeAStory.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                Main.getSceneManager().showRemoveAStorie();
+                Main.getSceneManager().showRemoveAStory();
             }
         });
         taskMenuButton.getItems().add(removeAStory);

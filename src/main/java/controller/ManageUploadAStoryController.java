@@ -46,7 +46,7 @@ public class ManageUploadAStoryController {
 
     public ManageUploadAStoryController() {
         super();
-        setUp();
+        //setUp();
         gson = new Gson();
     }
 
@@ -61,7 +61,6 @@ public class ManageUploadAStoryController {
     //Todo: how to test this?
 
     public String saveAStory(Story mpStory) {
-        //Todo: upload story to dbCouch include the details of the storyTeller and publishing date
         String storyToSave = gson.toJson(mpStory);
         JsonParser parser = new JsonParser();
         JsonObject jsonObject = parser.parse(storyToSave).getAsJsonObject();
