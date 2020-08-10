@@ -23,6 +23,7 @@ public class ManageUploadAStoryController {
     private UserDAO userDAO;
     private DBAccess dbAccess;
     private CouchDBAccess couchDBAccess;
+    private CouchDBStoryDAO couchDBStoryDAO;
     private Gson gson;
 
     @FXML
@@ -45,13 +46,13 @@ public class ManageUploadAStoryController {
 
     public ManageUploadAStoryController() {
         super();
-        //this.couchDBAccess = couchDBAccess;
         setUp();
         gson = new Gson();
     }
 
     public void setUp() {
-        CouchDBStoryDAO couchDBStoryDAO = new CouchDBStoryDAO(couchDBAccess);
+        this.couchDBAccess = new CouchDBAccess();
+        this.couchDBStoryDAO = new CouchDBStoryDAO(couchDBAccess);
         this.userDAO = new UserDAO(Main.getDBAccess());
         this.storyteller = User.getCurrentUser();
 
@@ -75,7 +76,7 @@ public class ManageUploadAStoryController {
 
     @FXML
     public void uploadAStory(ActionEvent actionEvent) {
-        createStory();
+        createStory(); //works
         saveAStory(story);
         Alert storySaved = new Alert(Alert.AlertType.INFORMATION);
         storySaved.setContentText("Your story has been uploaded");
