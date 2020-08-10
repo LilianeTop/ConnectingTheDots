@@ -10,7 +10,19 @@ public class Story {
     private User storyTeller;
     private String date;
 
-    public Story(int storyID, String title, String subTitle, String subject, String date, String summary, String content, User storyTeller) {
+    public Story(String title, String subTitle, String subject, String date, String summary, String content, User storyTeller) {
+        super();
+        //this.storyID = storyID;
+        this.title = title;
+        this.subTitle = subTitle;
+        this.subject = subject;
+        this.summary = summary;
+        this.content = content;
+        this.storyTeller = storyTeller;
+        this.date = date;
+    }
+
+    /*public Story(int storyID, String title, String subTitle, String subject, String date, String summary, String content, User storyTeller) {
         super();
         this.storyID = storyID;
         this.title = title;
@@ -25,7 +37,7 @@ public class Story {
     //constructor without ID for DAO CouchDB must create an ID and publishing date
     public Story(String title, String subTitle, String subject, String date, String summary, String content, User storyTeller) {
         this(0, title, subTitle, subject, date, summary, content, storyTeller);
-    }
+    }*/
 
 
 

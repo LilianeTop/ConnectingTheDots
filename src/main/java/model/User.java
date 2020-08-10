@@ -75,6 +75,9 @@ public class User {
     public void setEmailaddress(String emailaddress) {
         this.emailaddress = emailaddress;
     }
+    public static User getCurrentUser(){
+        return currentUser;
+    }
 
     public static void setCurrentUser(User currentUser) {
         User.currentUser = currentUser;

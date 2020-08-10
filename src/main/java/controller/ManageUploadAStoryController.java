@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import database.couchDB.CouchDBAccess;
 import database.couchDB.CouchDBStoryDAO;
+import database.mySQL.DBAccess;
 import database.mySQL.UserDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,7 +19,9 @@ import model.User;
 public class ManageUploadAStoryController {
     private User currentUser;
     private Story story;
+    private User storyteller;
     private UserDAO userDAO;
+    private DBAccess dbAccess;
     private CouchDBAccess couchDBAccess;
     private Gson gson;
 
@@ -49,9 +52,11 @@ public class ManageUploadAStoryController {
 
     public void setUp() {
         CouchDBStoryDAO couchDBStoryDAO = new CouchDBStoryDAO(couchDBAccess);
+        this.userDAO = new UserDAO(Main.getDBAccess());
+        this.storyteller = User.getCurrentUser();
+
     }
 
-    //Todo: ask Maria how this works. why is it not void? what does line 26- 30 do?
     //Todo: how to test this?
 
     public String saveAStory(Story mpStory) {
@@ -116,7 +121,7 @@ public class ManageUploadAStoryController {
             errorMessage.show();
             story = null;
         } else {
-            story = new Story(title, subtitle, subject, date, summary, content, userDAO.getOneByUsername(currentUser.getUserName()));
+            story = new Story(title, subtitle, subject, date, summary, content, userDAO.getOneByUsername(storyteller.getUserName()));
         }
     }
 }

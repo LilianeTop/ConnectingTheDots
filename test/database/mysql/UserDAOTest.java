@@ -59,7 +59,7 @@ class UserDAOTest {
     @Test
     void getOneByUsernameTest() {
         //User userToTest = userDAO.getOneByUsername(userTestList.get(0).getUserName());//gives null pointerexception why?
-        User user1ToTest = userDAO.getOneByUsername("HopMil001");
+        User user1ToTest = userDAO.getOneByUsername("HopMil002");
         assertTrue(user1ToTest.getLastName().equals("Hope"));
         //assertEquals(user1ToTest.getPassword(), userTestList.get(0).getPassword());//why does it change the password?
 
