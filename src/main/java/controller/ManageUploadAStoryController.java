@@ -81,6 +81,7 @@ public class ManageUploadAStoryController {
         Alert storySaved = new Alert(Alert.AlertType.INFORMATION);
         storySaved.setContentText("Your story has been uploaded");
         storySaved.show();
+        Main.getSceneManager().showWelcomeScene();
     }
 
     private void createStory() {
