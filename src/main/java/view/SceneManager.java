@@ -84,25 +84,6 @@ public class SceneManager {
         }
     }
 
-    public void showStoryListScene(Story story) {
-        FXMLLoader loader = getScene("/view/fxml/manageChangeAStory.fxml");
-        ManageChangeAStoryController controller = loader.getController();
-        controller.setUp();
-       /* try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/ManageChangeAStory.fxml"));
-            Parent root = loader.load();
-            ManageChangeAStoryController = loader.getController();
-            controller.setup(story);
-            Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-    }
-
-
-
     public void showRetrievePasswordScene() {
         /*FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/fxml/retrievePasswordScene.fxml"));
         RetrievePasswordSceneController controller = loader.getController();*/
@@ -163,9 +144,20 @@ public class SceneManager {
     public void showUploadAStory() {
         FXMLLoader loader = getScene("/view/fxml/manageUploadAStory.fxml");
         ManageUploadAStoryController controller = loader.getController();
+        //controller.setUp();
+    }
+    public void showStoryListScene(Story story) {
+        FXMLLoader loader = getScene("/view/fxml/manageChangeAStory.fxml");
+        ManageChangeAStoryController controller = loader.getController();
         controller.setUp();
 
     }
+    public void showExistingStoryScene(Story story) {
+        FXMLLoader loader = getScene("/view/fxml/manageUploadAStory.fxml");
+        ManageUploadAStoryController controller = loader.getController();
+        controller.setUp(story);
+    }
+
 
     public void showChangeAStory() {
         FXMLLoader loader = getScene("/view/fxml/manageChangeAStory.fxml");
@@ -178,4 +170,6 @@ public class SceneManager {
         ManageRemoveAStoryController controller = loader.getController();
         controller.setUp();
     }
+
+
 }

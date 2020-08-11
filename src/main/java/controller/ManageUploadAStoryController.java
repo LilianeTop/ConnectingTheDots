@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import main.Main;
 import model.Story;
@@ -31,6 +32,8 @@ public class ManageUploadAStoryController {
     @FXML
     private Button uploadButton;
     @FXML
+    private Label titleLabel;
+    @FXML
     private TextField titleTextfield;
     @FXML
     private TextField subtitleTextfield;
@@ -46,15 +49,21 @@ public class ManageUploadAStoryController {
 
     public ManageUploadAStoryController() {
         super();
-        //setUp();
-        gson = new Gson();
-    }
-
-    public void setUp() {
         this.couchDBAccess = new CouchDBAccess();
         this.couchDBStoryDAO = new CouchDBStoryDAO(couchDBAccess);
         this.userDAO = new UserDAO(Main.getDBAccess());
         this.storyteller = User.getCurrentUser();
+        gson = new Gson();
+    }
+
+    public void setUp(Story story) {
+       titleLabel.setText("Change your Story");
+       titleTextfield.setText(story.getTitle());
+       subtitleTextfield.setText(story.getSubTitle());
+       subjectTextfield.setText(story.getSubject());
+       dateTextfield.setText(story.getDate());
+       summaryTextfield.setText(story.getSummary());
+       contentTextfield.setText(story.getContent());
 
     }
 

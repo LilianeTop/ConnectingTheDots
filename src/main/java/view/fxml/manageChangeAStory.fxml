@@ -24,7 +24,7 @@
                 <ListView fx:id="storyListView" layoutX="-5.0" layoutY="8.0" prefHeight="292.0" prefWidth="350.0" />
             </children>
         </Pane>
-        <Button fx:id="updateButton" layoutX="275.0" layoutY="475.0" mnemonicParsing="false" onAction="#updateAStory" prefWidth="130" text="Change">
+        <Button fx:id="updateButton" layoutX="275.0" layoutY="475.0" mnemonicParsing="false" onAction="#selectAStory" prefWidth="130" text="Change Story">
             <font>
                 <Font size="14.0" />
             </font>
